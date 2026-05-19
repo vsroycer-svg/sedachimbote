@@ -3,122 +3,258 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SEDACHIMBOTE - Agua Potable y Saneamiento</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome para íconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-ys2WxGjAsiNmJtcbRvkSsmhVb9h7o4qyEKV4DaB9+cQi7E1fvWP+zZkq0BPEAX0l+3MG+hnIh4+1pAPBFpoLXA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="styles.css" />
+  <title>SEDACHIMBOTE S.A. - Llevamos vida a tu hogar </title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Estilos Generales y Reset */
+    :root {
+      --primary-color: #0056b3;
+      --secondary-color: #00b4d8;
+      --accent-color: #90e0ef;
+      --text-color: #333;
+      --bg-color: #f8f9fa;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 40px 0; }
+    
+    /* Header */
+    header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); display: flex; align-items: center; gap: 10px; }
+    .nav-menu ul { list-style: none; display: flex; gap: 20px; }
+    .nav-menu a { font-weight: 500; transition: color 0.3s; }
+    .nav-menu a:hover { color: var(--secondary-color); }
+    
+    /* Botones */
+    .btn { padding: 10px 24px; border-radius: 6px; font-weight: 600; transition: 0.3s; cursor: pointer; display: inline-block; }
+    .btn-primary { background: var(--primary-color); color: var(--white); border: none; }
+    .btn-primary:hover { background: #004494; }
+    .btn-secondary { background: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); }
+    .btn-secondary:hover { background: var(--accent-color); color: var(--primary-color); border-color: var(--accent-color); }
+
+    /* Hero Section */
+    .hero { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: var(--white); text-align: center; padding: 80px 0; }
+    .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+    .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero-buttons { display: flex; gap: 15px; justify-content: center; }
+
+    /* Dashboard Section */
+    .dashboard { padding: 60px 0; background: var(--bg-color); }
+    .section-title { text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--primary-color); }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .card { background: var(--white); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .card h3 { font-size: 1.2rem; margin-bottom: 20px; color: #444; text-align: center; }
+    .chart-container { position: relative; height: 300px; width: 100%; }
+
+    /* Servicios Section */
+    .features { background: var(--white); padding: 60px 0; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+    .feature-item { padding: 30px; border-radius: 10px; background: var(--bg-color); transition: transform 0.3s; }
+    .feature-item:hover { transform: translateY(-5px); }
+    .feature-item i { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 15px; }
+    .feature-item h3 { margin-bottom: 10px; color: var(--primary-color); }
+
+    /* Proyectos y Logros */
+    .logros { padding: 60px 0; background: #e9ecef; }
+    .logros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+    /* Footer */
+    footer { background: #212529; color: #adb5bd; padding: 40px 0; text-align: center; }
+    .footer-links { margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; }
+    .footer-links a:hover { color: var(--white); }
+  </style>
 </head>
 <body>
-  <!-- Header con logotipo y navegación -->
+
   <header>
     <div class="container header-container">
       <div class="logo">
-        <a href="#">
-          <img src="logo.png" alt="Logo de SEDACHIMBOTE" />
-        </a>
+        <i class="fas fa-hand-holding-water"></i> SEDACHIMBOTE S.A.
       </div>
       <nav class="nav-menu">
         <ul>
           <li><a href="#hero">Inicio</a></li>
-          <li><a href="#features">Servicios</a></li>
-          <li><a href="#testimonials">Testimonios</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#servicios">Servicios en Línea</a></li>
+          <li><a href="#dashboard">Indicadores</a></li>
+          <li><a href="#logros">Logros institucionales</a></li>
         </ul>
       </nav>
-      <button class="nav-toggle" aria-label="Abrir menú">
-        <i class="fas fa-bars"></i>
-      </button>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero section-hidden">
-    <div class="container hero-content">
-      <h1>Agua Potable de Calidad para Chimbote y la Región</h1>
-      <p>En SEDACHIMBOTE trabajamos cada día para llevar agua segura y servicio de saneamiento eficiente a tu hogar.</p>
+  <section id="hero" class="hero">
+    <div class="container">
+      <h1>Llevamos vida a tu hogar </h1>
+      <p>Somos una EPS de Saneamiento trabajando día a día para transformar el acceso al agua en nuestra jurisdicción: Chimbote, Nuevo Chimbote, Casma y Huarmey[cite: 14, 48].</p>
       <div class="hero-buttons">
-        <a href="#contacto" class="btn btn-primary">Contáctanos</a>
-        <a href="#features" class="btn btn-secondary">Conoce más</a>
+        <a href="#servicios" class="btn btn-primary">Atención al Cliente</a>
+        <a href="#dashboard" class="btn btn-secondary">Ver Transparencia</a>
       </div>
     </div>
   </section>
 
-    <!-- Features/Beneficios Section -->
-  <section id="features" class="features section-hidden">
+  <section id="dashboard" class="dashboard">
     <div class="container">
-      <h2>Nuestros Servicios</h2>
+      <h2 class="section-title">Panel de Control de Transparencia y Servicio</h2>
+      <div class="dashboard-grid">
+        
+        <div class="card">
+          <h3>Reporte de Pagos Atrasados (Morosidad)</h3>
+          <div class="chart-container">
+            <canvas id="chartMorosidad"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Consumo Promedio Mensual (m³)</h3>
+          <div class="chart-container">
+            <canvas id="chartConsumo"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Reclamos sobre el Servicio Activos</h3>
+          <div class="chart-container">
+            <canvas id="chartReclamos"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="features">
+    <div class="container">
+      <h2 class="section-title">Servicios en Línea y Orientación al Cliente [cite: 5]</h2>
       <div class="features-grid">
         <div class="feature-item">
-          <i class="fas fa-tint"></i>
-          <h3>Agua de Calidad</h3>
-          <p>Agua potable tratada con tecnología moderna para garantizar tu salud y bienestar.</p>
+          <i class="fas fa-laptop-house"></i>
+          <h3>Pague aquí su recibo </h3>
+          <p>Realiza el pago de tus servicios de forma rápida y 100% segura.</p>
         </div>
         <div class="feature-item">
-          <i class="fas fa-clock"></i>
-          <h3>Servicio 24/7</h3>
-          <p>Disponibilidad continua para emergencias y consultas, porque tu tranquilidad es nuestra prioridad.</p>
+          <i class="fas fa-file-signature"></i>
+          <h3>Mesa de Partes Virtual </h3>
+          <p>Ingresa y realiza el seguimiento de documentos sin salir de casa.</p>
         </div>
         <div class="feature-item">
-          <i class="fas fa-credit-card"></i>
-          <h3>Pago en Línea</h3>
-          <p>Paga tu recibo de agua de forma rápida y segura desde la comodidad de tu hogar.</p>
+          <i class="fas fa-clipboard-list"></i>
+          <h3>Consulta de Reclamos </h3>
+          <p>Presentación y seguimiento a reclamos de facturación y servicio[cite: 23, 27].</p>
         </div>
         <div class="feature-item">
-          <i class="fas fa-hands-helping"></i>
-          <h3>Compromiso Social</h3>
-          <p>Programas comunitarios y educativos para fomentar el uso responsable del agua en la región.</p>
+          <i class="fas fa-envelope-open-text"></i>
+          <h3>Suscríbete al recibo digital </h3>
+          <p>Ayuda al medio ambiente recibiendo tu facturación directamente en tu correo.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Social Proof / Testimonios Section -->
-  <section id="testimonials" class="testimonials section-hidden">
+  <section id="logros" class="logros">
     <div class="container">
-      <h2>Testimonios de la Comunidad</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-item">
-          <p>"Gracias a SEDACHIMBOTE ahora tenemos agua limpia en casa. Su servicio es excelente y siempre atentos a nuestras necesidades."</p>
-          <h4>María López, Chimbote</h4>
+      <h2 class="section-title">Logros que reflejan nuestro compromiso [cite: 13]</h2>
+      <div class="logros-grid">
+        <div class="card">
+          <h3><i class="fas fa-leaf" style="color: #2a9d8f;"></i> Proyecto MERESE [cite: 4]</h3>
+          <p><strong>Semillas de agua y esperanza:</strong> Impulsamos el trabajo de las comunidades altoandinas que protegen y reforestan nuestras fuentes de agua, retribuyendo sus acciones de conservación[cite: 9, 10, 11].</p>
         </div>
-        <div class="testimonial-item">
-          <p>"La atención y rapidez ante cualquier incidencia es sorprendente. ¡Recomendamos SEDACHIMBOTE a todos nuestros vecinos!"</p>
-          <h4>Juan Pérez, Nuevo Chimbote</h4>
+        <div class="card">
+          <h3><i class="fas fa-trophy" style="color: #e9c46a;"></i> Reconocimiento SUNASS [cite: 46]</h3>
+          <p>Gracias a una gestión transparente, obtuvimos el <strong>4to Lugar</strong> en el Benchmarking Regulatorio Sunass 2025 (Grandes 2), elevando la calidad del servicio en cada rincón[cite: 15, 16].</p>
         </div>
-        <div class="testimonial-item">
-          <p>"Con el recibo digital y el pago en línea, ahorrar tiempo es muy fácil. ¡Un servicio moderno y eficiente!"</p>
-          <h4>Ana García, Casma</h4>
+        <div class="card">
+          <h3><i class="fas fa-school" style="color: #e76f51;"></i> Educación sin Fugas </h3>
+          <p>Nuestro Gerente General lidera jornadas de la campaña "Educación sin fugas" en colegios de la provincia, fomentando una cultura de cuidado del agua.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Call to Action Final Section -->
-  <section id="contacto" class="cta section-hidden">
-    <div class="container">
-      <h2>¿Listo para conectar tu hogar a SEDACHIMBOTE?</h2>
-      <a href="#contacto" class="btn btn-primary">Contáctanos Hoy</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
-    <div class="container footer-container">
+    <div class="container">
       <div class="footer-links">
-        <a href="#">Política de Privacidad</a>
-        <a href="#">Términos de Uso</a>
-      </div>
-      <div class="footer-social">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#">Portal de Transparencia [cite: 2]</a>
+        <a href="#">Centros de Recaudación [cite: 41]</a>
+        <a href="#">Trabaja con nosotros [cite: 44]</a>
+        <a href="#">Normativa [cite: 38]</a>
       </div>
       <p>© 2026 SEDACHIMBOTE S.A. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <script src="scripts.js"></script>
+  <script>
+    // Configuración general para que los gráficos sean responsive
+    Chart.defaults.maintainAspectRatio = false;
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
+    // Etiquetas de localidades basadas en la jurisdicción
+    const localidades = ['Chimbote', 'Nvo. Chimbote', 'Casma', 'Huarmey'];
+
+    // 1. Gráfico de Pagos Atrasados (Morosidad) - Gráfico de Barras
+    const ctxMorosidad = document.getElementById('chartMorosidad').getContext('2d');
+    new Chart(ctxMorosidad, {
+      type: 'bar',
+      data: {
+        labels: localidades,
+        datasets: [{
+          label: 'Usuarios con atraso',
+          data: [1200, 850, 420, 310], // Datos simulados para el dashboard
+          backgroundColor: '#e63946',
+          borderRadius: 4
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // 2. Gráfico de Consumo Promedio - Gráfico de Líneas
+    const ctxConsumo = document.getElementById('chartConsumo').getContext('2d');
+    new Chart(ctxConsumo, {
+      type: 'line',
+      data: {
+        labels: localidades,
+        datasets: [{
+          label: 'Consumo (m³/mes)',
+          data: [18.5, 22.1, 15.3, 14.8], // Datos simulados para el dashboard
+          borderColor: '#0056b3',
+          backgroundColor: 'rgba(0, 86, 179, 0.2)',
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // 3. Gráfico de Reclamos - Gráfico de Anillo (Doughnut)
+    const ctxReclamos = document.getElementById('chartReclamos').getContext('2d');
+    new Chart(ctxReclamos, {
+      type: 'doughnut',
+      data: {
+        labels: localidades,
+        datasets: [{
+          data: [350, 210, 85, 60], // Datos simulados para el dashboard
+          backgroundColor: ['#0056b3', '#00b4d8', '#90e0ef', '#caf0f8'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        plugins: { legend: { position: 'bottom' } },
+        cutout: '70%'
+      }
+    });
+  </script>
 </body>
 </html>
