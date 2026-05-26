@@ -3,135 +3,1279 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SEDACHIMBOTE S.A. - Llevamos vida a tu hogar</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="description" content="AquaPura – Servicios de agua potable de calidad para hogares y empresas. Distribución, instalación y mantenimiento de sistemas de agua." />
+  <meta name="keywords" content="agua potable, distribución de agua, servicios de agua, instalación agua, mantenimiento agua, purificación agua" />
+  <meta name="author" content="AquaPura" />
+  <meta property="og:title" content="AquaPura – Agua Potable de Calidad" />
+  <meta property="og:description" content="Servicios integrales de agua potable para tu hogar y empresa. Calidad garantizada." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+  <title>Sedapal – Servicios de Agua Potable</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-  <header>
-    <div class="container header-container">
-      <div class="logo">
-        <i class="fas fa-hand-holding-water"></i> SEDACHIMBOTE S.A.
-      </div>
-      <nav class="nav-menu">
-        <ul>
-          <li><a href="#hero">Inicio</a></li>
-          <li><a href="#servicios">Servicios en Línea</a></li>
-          <li><a href="#dashboard">Indicadores</a></li>
-          <li><a href="#logros">Logros institucionales</a></li>
+  <!-- ============================================================
+       BARRA DE AVISO SUPERIOR
+  ============================================================ -->
+  <div class="top-bar">
+    <div class="container">
+      <p>
+        <i class="fas fa-phone-alt"></i> Llámanos: <a href=" AQUAFONO 317-8000 ">AQUAFONO 317-8000 </a>
+        &nbsp;|&nbsp;
+        <i class="fas fa-envelope"></i> <a href="mailto:info@aquapura.pe">sedanet@sedapal.com.pe</a>
+        &nbsp;|&nbsp;
+        <a href="https://facebook.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/company/aquapura" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.youtube.com/channel/UCeoOIz1cd5bWp5oTDanvBaw/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=5113178000&text=Hola,%20tengo%20una%20consulta."target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+	  </p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVEGACIÓN PRINCIPAL
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <!-- Logo -->
+		<a href="#inicio" class="navbar__logo" aria-label="AquaPura inicio"><img src="assets/sedapal-logo-vector.svg" alt="Logo AquaPura"class="navbar__logo-image">
+		<span class="logo-text">  <strong> </strong></span></a>
+
+      <!-- Menú principal -->
+      <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
+        <ul class="navbar__list">
+          <li><a href="#inicio" class="navbar__link active">Inicio</a></li>
+          <li><a href="#nosotros" class="navbar__link">Nosotros</a></li>
+          <li class="has-dropdown">
+            <a href="#servicios" class="navbar__link">Servicios <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="#servicios">Distribución de Agua</a></li>
+              <li><a href="#servicios">Instalación de Sistemas</a></li>
+              <li><a href="#servicios">Mantenimiento</a></li>
+              <li><a href="#servicios">Purificación</a></li>
+              <li><a href="#servicios">Cisterna y Tanques</a></li>
+            </ul>
+          </li>
+          <li><a href="#proceso" class="navbar__link">Proceso</a></li>
+          <li><a href="#proyectos" class="navbar__link">Proyectos</a></li>
+          <li><a href="#certificaciones" class="navbar__link">Calidad</a></li>
+          <li><a href="#testimonios" class="navbar__link">Testimonios</a></li>
+          <li><a href="#blog" class="navbar__link">Blog</a></li>
+          <li><a href="#contacto" class="navbar__link">Contacto</a></li>
         </ul>
       </nav>
+
+      <!-- CTA + Hamburguesa -->
+      <div class="navbar__actions">
+        <a href="#cotizacion" class="btn btn--primary btn--sm">Solicitar Cotización</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <section id="hero" class="hero">
-    <div class="container">
-      <h1>Llevamos vida a tu hogar</h1>
-      <p>Somos una EPS de Saneamiento trabajando día a día para transformar el acceso al agua en nuestra jurisdicción: Chimbote, Nuevo Chimbote, Casma y Huarmey.</p>
-      <div class="hero-buttons">
-        <a href="#servicios" class="btn btn-primary">Atención al Cliente</a>
-        <a href="#dashboard" class="btn btn-secondary">Ver Transparencia</a>
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <section id="dashboard" class="dashboard">
-    <div class="container">
-      <h2 class="section-title">Panel de Control de Transparencia y Servicio</h2>
-      <div class="dashboard-grid">
-        
-        <div class="card">
-          <h3>Reporte de Pagos Atrasados (Morosidad)</h3>
-          <div class="chart-container">
-            <canvas id="chartMorosidad"></canvas>
+    <!-- ============================================================
+         HERO / INICIO
+    ============================================================ -->
+    <section class="hero" id="inicio" aria-label="Sección principal">
+      <div class="hero__bg-video">
+        <!-- Opcional: <video autoplay muted loop playsinline src="assets/water-bg.mp4"></video> -->
+        <div class="hero__bg-overlay"></div>
+      </div>
+
+      <div class="container hero__content">
+        <span class="hero__badge">Empresa certificada · Desde 1998</span>
+        <h1 class="hero__title">
+          Agua potable pura,<br/>
+          <em>siempre en tu hogar</em>
+        </h1>
+        <p class="hero__subtitle">
+          Brindamos servicios integrales de agua potable con los más altos estándares de calidad.
+          Distribución, instalación y mantenimiento para hogares y empresas en todo el país.
+        </p>
+        <div class="hero__cta-group">
+          <a href="#cotizacion" class="btn btn--primary btn--lg">
+            <i class="fas fa-file-invoice"></i> Solicitar Cotización
+          </a>
+          <a href="#servicios" class="btn btn--outline btn--lg">
+            <i class="fas fa-play-circle"></i> Ver Servicios
+          </a>
+        </div>
+
+        <!-- Stats rápidas -->
+        <div class="hero__stats">
+          <div class="stat">
+            <span class="stat__number" data-count="25">0</span><span>+</span>
+            <span class="stat__label">Años de experiencia</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-count="15000">0</span><span>+</span>
+            <span class="stat__label">Clientes satisfechos</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-count="98">0</span><span>%</span>
+            <span class="stat__label">Índice de satisfacción</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-count="50">0</span><span>+</span>
+            <span class="stat__label">Proyectos activos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <a href="#nosotros" class="hero__scroll-down" aria-label="Ir a la siguiente sección">
+        <i class="fas fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <!-- ============================================================
+         FRANJA DE CONFIANZA / LOGOS
+    ============================================================ -->
+<section class="trust-section">
+
+  <div class="trust-overlay"></div>
+
+  <div class="container trust-content">
+
+    <h2 class="trust-title">
+      Empresas que confían en nosotros
+    </h2>
+
+    <p class="trust-subtitle">
+      Más de 200 organizaciones trabajan con nuestros
+      servicios de agua, purificación y mantenimiento.
+    </p>
+
+    <div class="trust-grid">
+
+      <div class="trust-card">
+
+        <img 
+          src="assets/municipalidad.jpg"
+          alt="MuniDistrito"
+        >
+
+        <span>MuniDistrito</span>
+
+      </div>
+
+      <div class="trust-card">
+
+        <img 
+          src="assets/empresas-casco-amarillo-casa-lima.webp"
+          alt="Constructora "
+        >
+
+        <span>Constructora </span>
+
+      </div>
+
+      <div class="trust-card">
+
+        <img 
+          src="assets/megaplaza.webp"
+          alt="Mega Plaza"
+        >
+
+        <span>MegaPlaza</span>
+
+      </div>
+
+      <div class="trust-card">
+
+        <img 
+          src="assets/san jacinto.jpg"
+          alt="San Jacinto"
+        >
+
+        <span>SanJAcinto</span>
+
+      </div>
+
+      <div class="trust-card">
+
+        <img 
+          src="assets/essalud.jpg"
+          alt="Essalud III"
+        >
+
+        <span>EssaludIII</span>
+
+      </div>
+
+      <div class="trust-card">
+
+        <img 
+          src="assets/UNS.webp"
+          alt="Universidad Del Santa"
+        >
+
+        <span>UNS</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- ============================================================
+         NOSOTROS
+    ============================================================ -->
+    <section class="about" id="nosotros" aria-label="Sobre nosotros">
+      <div class="container about__grid">
+        <div class="about__image-wrap">
+          <img src="assets/about-team.jpg" alt="Equipo técnico de AquaPura en campo" class="about__image" loading="lazy" />
+          <div class="about__badge-float">
+            <i class="fas fa-award"></i>
+            <span>ISO 9001:2015<br/>Certificados</span>
           </div>
         </div>
 
-        <div class="card">
-          <h3>Consumo Promedio Mensual (m³)</h3>
-          <div class="chart-container">
-            <canvas id="chartConsumo"></canvas>
+        <div class="about__content">
+          <span class="section-label">Quiénes somos</span>
+          <h2 class="section-title">Más de 25 años llevando agua pura a tu hogar</h2>
+          <p class="about__text">
+            En <strong>AquaPura</strong> somos especialistas en la distribución, instalación y mantenimiento
+            de sistemas de agua potable. Desde 1998, trabajamos con compromiso y tecnología de vanguardia
+            para garantizar que cada familia y empresa reciba agua segura, limpia y confiable.
+          </p>
+          <p class="about__text">
+            Contamos con un equipo de ingenieros y técnicos certificados, infraestructura moderna y
+            procesos auditados internacionalmente para ofrecerte un servicio sin igual.
+          </p>
+
+          <ul class="about__features">
+            <li><i class="fas fa-check-circle"></i> Personal técnico certificado</li>
+            <li><i class="fas fa-check-circle"></i> Equipos de última generación</li>
+            <li><i class="fas fa-check-circle"></i> Atención 24/7 en emergencias</li>
+            <li><i class="fas fa-check-circle"></i> Garantía en todos los servicios</li>
+            <li><i class="fas fa-check-circle"></i> Cobertura nacional</li>
+            <li><i class="fas fa-check-circle"></i> Precios transparentes sin sorpresas</li>
+          </ul>
+
+          <div class="about__cta-row">
+            <a href="#cotizacion" class="btn btn--primary">Solicitar Servicio</a>
+            <a href="assets/brochure.pdf" class="btn btn--ghost" target="_blank">
+              <i class="fas fa-download"></i> Descargar Brochure
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MISIÓN, VISIÓN Y VALORES
+    ============================================================ -->
+    <section class="mission-vision" aria-label="Misión, visión y valores">
+      <div class="container">
+        <div class="mv-grid">
+          <div class="mv-card">
+            <div class="mv-card__icon"><i class="fas fa-bullseye"></i></div>
+            <h3>Misión</h3>
+            <p>Proveer servicios de agua potable de alta calidad, accesibles y sostenibles, mejorando la calidad de vida de las personas y comunidades que atendemos.</p>
+          </div>
+          <div class="mv-card mv-card--accent">
+            <div class="mv-card__icon"><i class="fas fa-eye"></i></div>
+            <h3>Visión</h3>
+            <p>Ser la empresa líder en servicios de agua potable a nivel nacional, reconocida por excelencia, innovación y compromiso con el medio ambiente.</p>
+          </div>
+          <div class="mv-card">
+            <div class="mv-card__icon"><i class="fas fa-heart"></i></div>
+            <h3>Valores</h3>
+            <ul class="mv-values">
+              <li>Integridad y transparencia</li>
+              <li>Compromiso con la calidad</li>
+              <li>Responsabilidad ambiental</li>
+              <li>Innovación constante</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICIOS
+    ============================================================ -->
+    <section class="services" id="servicios" aria-label="Nuestros servicios">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Lo que hacemos</span>
+          <h2 class="section-title">Servicios integrales de agua potable</h2>
+          <p class="section-desc">
+            Ofrecemos soluciones completas para cada necesidad, desde hogares hasta grandes proyectos industriales.
+          </p>
+        </div>
+
+        <div class="services__grid">
+
+          <article class="service-card">
+            <div class="service-card__icon"><i class="fas fa-truck-droplet"></i></div>
+            <h3 class="service-card__title">Distribución de Agua</h3>
+            <p class="service-card__desc">Entrega de agua potable en camiones cisterna certificados a domicilios, obras y empresas en toda la región.</p>
+            <ul class="service-card__list">
+              <li>Entregas programadas y de emergencia</li>
+              <li>Agua tratada y certificada</li>
+              <li>Seguimiento en tiempo real</li>
+            </ul>
+            <a href="#cotizacion" class="service-card__link">Ver más <i class="fas fa-arrow-right"></i></a>
+          </article>
+
+          <article class="service-card service-card--featured">
+            <span class="service-card__badge">Más solicitado</span>
+            <div class="service-card__icon"><i class="fas fa-tools"></i></div>
+            <h3 class="service-card__title">Instalación de Sistemas</h3>
+            <p class="service-card__desc">Diseño e instalación completa de sistemas de tuberías, bombas, cisternas y redes de distribución domiciliaria.</p>
+            <ul class="service-card__list">
+              <li>Diagnóstico y diseño personalizado</li>
+              <li>Materiales de primera calidad</li>
+              <li>Garantía de instalación</li>
+            </ul>
+            <a href="#cotizacion" class="service-card__link">Ver más <i class="fas fa-arrow-right"></i></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__icon"><i class="fas fa-wrench"></i></div>
+            <h3 class="service-card__title">Mantenimiento Preventivo</h3>
+            <p class="service-card__desc">Planes de mantenimiento periódico para garantizar el óptimo funcionamiento de tu sistema de agua.</p>
+            <ul class="service-card__list">
+              <li>Revisión de tuberías y válvulas</li>
+              <li>Limpieza de cisternas y tanques</li>
+              <li>Reportes técnicos detallados</li>
+            </ul>
+            <a href="#cotizacion" class="service-card__link">Ver más <i class="fas fa-arrow-right"></i></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__icon"><i class="fas fa-filter"></i></div>
+            <h3 class="service-card__title">Purificación y Tratamiento</h3>
+            <p class="service-card__desc">Sistemas de purificación avanzada: ósmosis inversa, filtros UV, cloración y análisis bacteriológico.</p>
+            <ul class="service-card__list">
+              <li>Análisis fisicoquímico y bacteriológico</li>
+              <li>Equipos de purificación certificados</li>
+              <li>Seguimiento de calidad continuo</li>
+            </ul>
+            <a href="#cotizacion" class="service-card__link">Ver más <i class="fas fa-arrow-right"></i></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__icon"><i class="fas fa-building"></i></div>
+            <h3 class="service-card__title">Cisternas y Tanques</h3>
+            <p class="service-card__desc">Instalación, limpieza y desinfección de cisternas y tanques elevados para uso domiciliario e industrial.</p>
+            <ul class="service-card__list">
+              <li>Limpieza con productos certificados</li>
+              <li>Desinfección con hipoclorito</li>
+              <li>Certificado de salubridad</li>
+            </ul>
+            <a href="#cotizacion" class="service-card__link">Ver más <i class="fas fa-arrow-right"></i></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__icon"><i class="fas fa-hard-hat"></i></div>
+            <h3 class="service-card__title">Proyectos Industriales</h3>
+            <p class="service-card__desc">Soluciones de gran escala para industrias, conjuntos habitacionales, hospitales y municipios.</p>
+            <ul class="service-card__list">
+              <li>Ingeniería de proyectos a medida</li>
+              <li>Gestión integral de obras</li>
+              <li>Supervisión técnica permanente</li>
+            </ul>
+            <a href="#cotizacion" class="service-card__link">Ver más <i class="fas fa-arrow-right"></i></a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROCESO DE TRABAJO
+    ============================================================ -->
+    <section class="process" id="proceso" aria-label="Nuestro proceso de trabajo">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Cómo trabajamos</span>
+          <h2 class="section-title">Simple, rápido y transparente</h2>
+        </div>
+
+        <ol class="process__steps">
+          <li class="process__step">
+            <div class="process__step-number">01</div>
+            <div class="process__step-content">
+              <h3>Consulta Inicial</h3>
+              <p>Nos contactas por teléfono, WhatsApp o formulario. Analizamos tu necesidad y te orientamos sin costo.</p>
+            </div>
+          </li>
+          <li class="process__step">
+            <div class="process__step-number">02</div>
+            <div class="process__step-content">
+              <h3>Diagnóstico y Propuesta</h3>
+              <p>Enviamos a un técnico a evaluar tu instalación. En 24 h recibes una cotización detallada y transparente.</p>
+            </div>
+          </li>
+          <li class="process__step">
+            <div class="process__step-number">03</div>
+            <div class="process__step-content">
+              <h3>Ejecución del Servicio</h3>
+              <p>Nuestro equipo certificado ejecuta el trabajo con materiales de calidad y en el plazo acordado.</p>
+            </div>
+          </li>
+          <li class="process__step">
+            <div class="process__step-number">04</div>
+            <div class="process__step-content">
+              <h3>Control de Calidad</h3>
+              <p>Realizamos pruebas y análisis de calidad del agua antes de entregar el servicio al cliente.</p>
+            </div>
+          </li>
+          <li class="process__step">
+            <div class="process__step-number">05</div>
+            <div class="process__step-content">
+              <h3>Seguimiento Post-Servicio</h3>
+              <p>Te contactamos para asegurar tu satisfacción y ofrecerte planes de mantenimiento continuo.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         POR QUÉ ELEGIRNOS (BENEFICIOS)
+    ============================================================ -->
+    <section class="benefits" aria-label="Por qué elegirnos">
+      <div class="container">
+        <div class="section-header section-header--light">
+          <span class="section-label">Por qué elegirnos</span>
+          <h2 class="section-title">Comprometidos con tu bienestar</h2>
+        </div>
+
+        <div class="benefits__grid">
+          <div class="benefit-item">
+            <div class="benefit-item__icon"><i class="fas fa-shield-halved"></i></div>
+            <h4>Agua 100% Segura</h4>
+            <p>Cada litro pasa por controles de calidad rigurosos y certificación sanitaria.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item__icon"><i class="fas fa-headset"></i></div>
+            <h4>Soporte 24/7</h4>
+            <p>Línea de emergencias disponible las 24 horas, los 7 días de la semana.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item__icon"><i class="fas fa-leaf"></i></div>
+            <h4>Eco-responsables</h4>
+            <p>Procesos sostenibles que minimizan el impacto ambiental en cada operación.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item__icon"><i class="fas fa-wallet"></i></div>
+            <h4>Precios Justos</h4>
+            <p>Tarifas competitivas con financiamiento disponible para proyectos grandes.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item__icon"><i class="fas fa-certificate"></i></div>
+            <h4>Técnicos Certificados</h4>
+            <p>Personal con licencias, formación continua y experiencia demostrada.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item__icon"><i class="fas fa-map-location-dot"></i></div>
+            <h4>Cobertura Nacional</h4>
+            <p>Presencia en más de 12 regiones del país con delegaciones locales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROYECTOS / GALERÍA
+    ============================================================ -->
+    <section class="projects" id="proyectos" aria-label="Proyectos realizados">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Nuestro trabajo</span>
+          <h2 class="section-title">Proyectos que hablan por sí solos</h2>
+        </div>
+
+        <!-- Filtros -->
+        <div class="projects__filters" role="tablist" aria-label="Filtrar proyectos">
+          <button class="filter-btn filter-btn--active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+          <button class="filter-btn" data-filter="residencial" role="tab" aria-selected="false">Residencial</button>
+          <button class="filter-btn" data-filter="industrial" role="tab" aria-selected="false">Industrial</button>
+          <button class="filter-btn" data-filter="municipal" role="tab" aria-selected="false">Municipal</button>
+          <button class="filter-btn" data-filter="comercial" role="tab" aria-selected="false">Comercial</button>
+        </div>
+
+        <div class="projects__grid">
+          <article class="project-card" data-category="residencial">
+            <img src="assets/project-1.jpg" alt="Instalación residencial en Lima" loading="lazy" />
+            <div class="project-card__info">
+              <span class="project-card__cat">Residencial</span>
+              <h3>Conjunto Los Olivos</h3>
+              <p>Instalación completa para 200 viviendas · Lima</p>
+            </div>
+          </article>
+          <article class="project-card" data-category="industrial">
+            <img src="assets/project-2.jpg" alt="Sistema industrial de agua potable" loading="lazy" />
+            <div class="project-card__info">
+              <span class="project-card__cat">Industrial</span>
+              <h3>Planta Textil Arequipa</h3>
+              <p>Sistema de purificación industrial · Arequipa</p>
+            </div>
+          </article>
+          <article class="project-card" data-category="municipal">
+            <img src="assets/project-3.jpg" alt="Proyecto municipal de agua" loading="lazy" />
+            <div class="project-card__info">
+              <span class="project-card__cat">Municipal</span>
+              <h3>Red Puno Norte</h3>
+              <p>Red de distribución para 3,000 familias · Puno</p>
+            </div>
+          </article>
+          <article class="project-card" data-category="comercial">
+            <img src="assets/project-4.jpg" alt="Instalación comercial hotel" loading="lazy" />
+            <div class="project-card__info">
+              <span class="project-card__cat">Comercial</span>
+              <h3>Hotel Costa Azul</h3>
+              <p>Sistema de agua y tratamiento · Trujillo</p>
+            </div>
+          </article>
+          <article class="project-card" data-category="residencial">
+            <img src="assets/project-5.jpg" alt="Cisterna residencial" loading="lazy" />
+            <div class="project-card__info">
+              <span class="project-card__cat">Residencial</span>
+              <h3>Edificio Las Magnolias</h3>
+              <p>Cisternas y bombeo · Cusco</p>
+            </div>
+          </article>
+          <article class="project-card" data-category="municipal">
+            <img src="assets/project-6.jpg" alt="Proyecto agua rural" loading="lazy" />
+            <div class="project-card__info">
+              <span class="project-card__cat">Municipal</span>
+              <h3>Agua para Comunidades</h3>
+              <p>Proyecto social 8 comunidades · Huánuco</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects__cta">
+          <a href="#contacto" class="btn btn--primary">Ver todos los proyectos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DATOS / IMPACTO
+    ============================================================ -->
+    <section class="impact" aria-label="Nuestro impacto">
+      <div class="container impact__grid">
+        <div class="impact__text">
+          <span class="section-label section-label--light">Nuestro impacto</span>
+          <h2 class="section-title section-title--light">Cifras que reflejan nuestro compromiso</h2>
+          <p>Cada proyecto es una historia de vida mejorada. Estos son los resultados de más de dos décadas de trabajo comprometido con el acceso al agua potable.</p>
+          <a href="#nosotros" class="btn btn--outline-light">Conocer más</a>
+        </div>
+        <div class="impact__counters">
+          <div class="impact-counter">
+            <span class="impact-counter__num" data-count="15000">0</span><span>+</span>
+            <span>Hogares abastecidos</span>
+          </div>
+          <div class="impact-counter">
+            <span class="impact-counter__num" data-count="300">0</span><span>+</span>
+            <span>Proyectos completados</span>
+          </div>
+          <div class="impact-counter">
+            <span class="impact-counter__num" data-count="12">0</span>
+            <span>Regiones con cobertura</span>
+          </div>
+          <div class="impact-counter">
+            <span class="impact-counter__num" data-count="50000">0</span><span>+</span>
+            <span>Personas beneficiadas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CERTIFICACIONES Y CALIDAD
+    ============================================================ -->
+    <section class="certifications" id="certificaciones" aria-label="Certificaciones y calidad">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Calidad garantizada</span>
+          <h2 class="section-title">Certificaciones internacionales</h2>
+          <p class="section-desc">Contamos con las certificaciones más exigentes del sector para garantizarte agua segura y servicios de excelencia.</p>
+        </div>
+
+        <div class="certifications__grid">
+          <div class="cert-card">
+            <img src="assets/cert-iso9001.svg" alt="Certificación ISO 9001:2015" />
+            <h4>ISO 9001:2015</h4>
+            <p>Sistema de Gestión de Calidad</p>
+          </div>
+          <div class="cert-card">
+            <img src="assets/cert-iso14001.svg" alt="Certificación ISO 14001" />
+            <h4>ISO 14001:2015</h4>
+            <p>Gestión Ambiental</p>
+          </div>
+          <div class="cert-card">
+            <img src="assets/cert-digesa.svg" alt="Certificación DIGESA" />
+            <h4>DIGESA</h4>
+            <p>Dirección General de Salud Ambiental</p>
+          </div>
+          <div class="cert-card">
+            <img src="assets/cert-sunass.svg" alt="Registro SUNASS" />
+            <h4>SUNASS</h4>
+            <p>Superintendencia Nacional de Servicios de Saneamiento</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIOS
+    ============================================================ -->
+    <section class="testimonials" id="testimonios" aria-label="Testimonios de clientes">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Lo que dicen nuestros clientes</span>
+          <h2 class="section-title">La experiencia de quienes confían en nosotros</h2>
+        </div>
+
+        <div class="testimonials__slider" id="testimonialsSlider" role="list">
+
+          <article class="testimonial-card" role="listitem">
+            <div class="testimonial-card__stars" aria-label="5 de 5 estrellas">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <blockquote>
+              "El servicio fue impecable desde el primer contacto hasta la entrega. El equipo de AquaPura instaló todo en tiempo récord y el agua es de calidad excelente."
+            </blockquote>
+            <div class="testimonial-card__author">
+              <img src="assets/client-1.jpg" alt="María García" loading="lazy" />
+              <div>
+                <strong>María García</strong>
+                <span>Administradora · Edificio Las Palmas</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card" role="listitem">
+            <div class="testimonial-card__stars" aria-label="5 de 5 estrellas">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <blockquote>
+              "Llevamos 3 años con su plan de mantenimiento y jamás hemos tenido un problema. Profesionales, puntuales y muy amables. Los recomiendo sin dudarlo."
+            </blockquote>
+            <div class="testimonial-card__author">
+              <img src="assets/client-2.jpg" alt="Carlos Mendoza" loading="lazy" />
+              <div>
+                <strong>Carlos Mendoza</strong>
+                <span>Gerente de Planta · Industrias Textil Norte</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card" role="listitem">
+            <div class="testimonial-card__stars" aria-label="5 de 5 estrellas">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <blockquote>
+              "Gracias a AquaPura pudimos llevar agua potable a nuestra comunidad rural. Un proyecto social increíble ejecutado con mucha calidad y responsabilidad."
+            </blockquote>
+            <div class="testimonial-card__author">
+              <img src="assets/client-3.jpg" alt="Rosa Quispe" loading="lazy" />
+              <div>
+                <strong>Rosa Quispe</strong>
+                <span>Presidenta · Comunidad San Isidro, Puno</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card" role="listitem">
+            <div class="testimonial-card__stars" aria-label="4 de 5 estrellas">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="far fa-star"></i>
+            </div>
+            <blockquote>
+              "Excelente empresa. La respuesta ante una emergencia fue rapidísima, menos de 2 horas. El personal muy calificado. Definitivamente seguiré contratándolos."
+            </blockquote>
+            <div class="testimonial-card__author">
+              <img src="assets/client-4.jpg" alt="Juan Torres" loading="lazy" />
+              <div>
+                <strong>Juan Torres</strong>
+                <span>Propietario · Hotel Mirador Cusco</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Controles del slider -->
+        <div class="testimonials__controls">
+          <button class="slider-btn" id="prevTestimonial" aria-label="Testimonio anterior">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Seleccionar testimonio"></div>
+          <button class="slider-btn" id="nextTestimonial" aria-label="Siguiente testimonio">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BLOG / NOTICIAS
+    ============================================================ -->
+    <section class="blog" id="blog" aria-label="Blog y noticias">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Blog</span>
+          <h2 class="section-title">Consejos y novedades sobre agua potable</h2>
+        </div>
+
+        <div class="blog__grid">
+          <article class="blog-card">
+            <a href="blog/como-limpiar-cisterna.html">
+              <img src="assets/blog-1.jpg" alt="Limpieza de cisterna" loading="lazy" />
+            </a>
+            <div class="blog-card__body">
+              <span class="blog-card__cat">Mantenimiento</span>
+              <span class="blog-card__date"><i class="fas fa-calendar-alt"></i> 10 de mayo, 2025</span>
+              <h3><a href="blog/como-limpiar-cisterna.html">¿Con qué frecuencia debes limpiar tu cisterna?</a></h3>
+              <p>La limpieza regular de tu cisterna es fundamental para garantizar agua segura. Te explicamos la frecuencia recomendada y el proceso correcto.</p>
+              <a href="blog/como-limpiar-cisterna.html" class="blog-card__link">Leer más <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a href="blog/senales-agua-contaminada.html">
+              <img src="assets/blog-2.jpg" alt="Señales de agua contaminada" loading="lazy" />
+            </a>
+            <div class="blog-card__body">
+              <span class="blog-card__cat">Salud</span>
+              <span class="blog-card__date"><i class="fas fa-calendar-alt"></i> 2 de abril, 2025</span>
+              <h3><a href="blog/senales-agua-contaminada.html">5 señales de que tu agua puede estar contaminada</a></h3>
+              <p>Aprende a identificar los indicadores más comunes que señalan problemas de calidad en el agua de tu hogar.</p>
+              <a href="blog/senales-agua-contaminada.html" class="blog-card__link">Leer más <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <a href="blog/ahorro-agua-hogar.html">
+              <img src="assets/blog-3.jpg" alt="Ahorro de agua en el hogar" loading="lazy" />
+            </a>
+            <div class="blog-card__body">
+              <span class="blog-card__cat">Consejos</span>
+              <span class="blog-card__date"><i class="fas fa-calendar-alt"></i> 15 de marzo, 2025</span>
+              <h3><a href="blog/ahorro-agua-hogar.html">10 formas de ahorrar agua en casa sin sacrificar comodidad</a></h3>
+              <p>Pequeños hábitos que marcan una gran diferencia. Descubre cómo reducir el consumo de agua y tu factura mensual.</p>
+              <a href="blog/ahorro-agua-hogar.html" class="blog-card__link">Leer más <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="blog__cta">
+          <a href="blog/" class="btn btn--ghost">Ver todos los artículos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PREGUNTAS FRECUENTES
+    ============================================================ -->
+    <section class="faq" id="faq" aria-label="Preguntas frecuentes">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-title">Preguntas frecuentes</h2>
+          <p class="section-desc">¿Tienes dudas? Aquí respondemos las consultas más comunes. Si no encuentras lo que buscas, usa nuestro chat.</p>
+        </div>
+
+        <div class="faq__list" id="faqList">
+
+          <details class="faq-item" open>
+            <summary class="faq-item__question">
+              ¿En cuánto tiempo pueden instalar mi sistema de agua?
+              <span class="faq-item__icon"><i class="fas fa-plus"></i></span>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Los tiempos varían según la complejidad del proyecto. Una instalación domiciliaria estándar toma entre 1 y 3 días. Proyectos industriales pueden requerir semanas. Tras el diagnóstico, recibirás un cronograma detallado.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              ¿Qué garantías ofrecen en sus servicios?
+              <span class="faq-item__icon"><i class="fas fa-plus"></i></span>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Todos nuestros servicios cuentan con garantía de entre 6 meses y 2 años según el tipo de trabajo. Los materiales instalados tienen garantía de fábrica adicional. En caso de cualquier problema cubierto, atendemos sin costo adicional.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              ¿Trabajan con comunidades rurales o zonas alejadas?
+              <span class="faq-item__icon"><i class="fas fa-plus"></i></span>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Sí. Contamos con programas especiales para comunidades rurales y convenios con municipios y ONGs. Evaluamos cada proyecto y ofrecemos condiciones adaptadas a la realidad económica de cada comunidad.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              ¿Con qué frecuencia debo limpiar mi cisterna?
+              <span class="faq-item__icon"><i class="fas fa-plus"></i></span>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Se recomienda limpiar la cisterna cada 6 meses como mínimo. En zonas con agua de baja calidad o en propiedades con muchos usuarios, puede ser necesario hacerlo trimestralmente.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              ¿Ofrecen financiamiento para proyectos grandes?
+              <span class="faq-item__icon"><i class="fas fa-plus"></i></span>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Sí. Para proyectos residenciales e industriales de gran escala, ofrecemos planes de pago en cuotas mensuales. Contáctanos para evaluar las opciones disponibles según el monto y tipo de proyecto.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              ¿Tienen atención de emergencias fuera de horario?
+              <span class="faq-item__icon"><i class="fas fa-plus"></i></span>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Sí. Contamos con una línea de emergencias disponible las 24 horas del día, los 7 días de la semana. Para clientes con contrato de mantenimiento, la atención de urgencias tiene prioridad y sin costo adicional en horario nocturno.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FORMULARIO DE COTIZACIÓN
+    ============================================================ -->
+    <section class="quote" id="cotizacion" aria-label="Formulario de cotización">
+      <div class="container quote__inner">
+        <div class="quote__text">
+          <span class="section-label section-label--light">Cotización gratuita</span>
+          <h2 class="section-title section-title--light">¿Listo para tener agua pura en tu hogar?</h2>
+          <p>Cuéntanos tu necesidad y te enviamos una propuesta sin compromiso en menos de 24 horas.</p>
+
+          <ul class="quote__benefits">
+            <li><i class="fas fa-check"></i> Sin costo ni compromiso</li>
+            <li><i class="fas fa-check"></i> Respuesta en menos de 24 h</li>
+            <li><i class="fas fa-check"></i> Visita técnica gratuita</li>
+            <li><i class="fas fa-check"></i> Asesoría personalizada</li>
+          </ul>
+        </div>
+
+        <form class="quote__form" id="quoteForm" novalidate aria-label="Formulario de solicitud de cotización">
+          <h3 class="quote__form-title">Solicita tu cotización</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="q-nombre">Nombre completo *</label>
+              <input type="text" id="q-nombre" name="nombre" required placeholder="Juan Pérez" autocomplete="name" />
+              <span class="form-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="q-empresa">Empresa / Organización</label>
+              <input type="text" id="q-empresa" name="empresa" placeholder="Mi Empresa S.A.C." autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="q-email">Correo electrónico *</label>
+              <input type="email" id="q-email" name="email" required placeholder="correo@ejemplo.com" autocomplete="email" />
+              <span class="form-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="q-telefono">Teléfono / WhatsApp *</label>
+              <input type="tel" id="q-telefono" name="telefono" required placeholder="+51 900 000 000" autocomplete="tel" />
+              <span class="form-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="q-servicio">Servicio requerido *</label>
+            <select id="q-servicio" name="servicio" required>
+              <option value="" disabled selected>Selecciona un servicio</option>
+              <option value="distribucion">Distribución de agua</option>
+              <option value="instalacion">Instalación de sistemas</option>
+              <option value="mantenimiento">Mantenimiento preventivo</option>
+              <option value="purificacion">Purificación y tratamiento</option>
+              <option value="cisterna">Cisternas y tanques</option>
+              <option value="industrial">Proyectos industriales</option>
+              <option value="otro">Otro</option>
+            </select>
+            <span class="form-error" role="alert"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="q-ciudad">Ciudad / Distrito *</label>
+              <input type="text" id="q-ciudad" name="ciudad" required placeholder="Lima, Miraflores" />
+              <span class="form-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="q-tipo">Tipo de propiedad</label>
+              <select id="q-tipo" name="tipo_propiedad">
+                <option value="" disabled selected>Selecciona</option>
+                <option value="casa">Casa</option>
+                <option value="apartamento">Apartamento</option>
+                <option value="edificio">Edificio / Condominio</option>
+                <option value="comercio">Local comercial</option>
+                <option value="industria">Industria / Planta</option>
+                <option value="municipio">Municipio / Comunidad</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="q-mensaje">Descripción de tu necesidad *</label>
+            <textarea id="q-mensaje" name="mensaje" required rows="4" placeholder="Cuéntanos brevemente qué necesitas..."></textarea>
+            <span class="form-error" role="alert"></span>
+          </div>
+
+          <div class="form-group form-group--check">
+            <label class="checkbox-label">
+              <input type="checkbox" name="acepta_terminos" id="q-terminos" required />
+              <span>Acepto la <a href="politica-privacidad.html" target="_blank">Política de Privacidad</a> y el tratamiento de mis datos. *</span>
+            </label>
+            <span class="form-error" role="alert"></span>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full" id="submitQuote">
+            <i class="fas fa-paper-plane"></i> Enviar Solicitud
+          </button>
+
+          <p class="form-note">* Campos obligatorios. Responderemos en menos de 24 horas hábiles.</p>
+
+          <!-- Mensaje de éxito -->
+          <div class="form-success" id="formSuccess" hidden role="status" aria-live="polite">
+            <i class="fas fa-circle-check"></i>
+            <h4>¡Solicitud recibida!</h4>
+            <p>Gracias por contactarnos. Te responderemos en menos de 24 horas.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACTO
+    ============================================================ -->
+    <section class="contact" id="contacto" aria-label="Información de contacto">
+      <div class="container contact__grid">
+
+        <!-- Info de contacto -->
+        <div class="contact__info">
+          <span class="section-label">Contáctanos</span>
+          <h2 class="section-title">Estamos aquí para ayudarte</h2>
+          <p>Nuestro equipo está disponible para resolver tus dudas y atender tus solicitudes de la forma más rápida posible.</p>
+
+          <ul class="contact__details">
+            <li>
+              <div class="contact__icon"><i class="fas fa-location-dot"></i></div>
+              <div>
+                <strong>Oficina Principal</strong>
+                <span>Av. Las Aguas 1245, San Isidro, Lima – Perú</span>
+              </div>
+            </li>
+            <li>
+              <div class="contact__icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <strong>Teléfono</strong>
+                <a href="tel:+51900000000">+51 900 000 000</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact__icon"><i class="fab fa-whatsapp"></i></div>
+              <div>
+                <strong>WhatsApp</strong>
+                <a href="https://wa.me/51900000000" target="_blank" rel="noopener noreferrer">+51 900 000 000</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact__icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <strong>Correo</strong>
+                <a href="mailto:info@aquapura.pe">info@aquapura.pe</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact__icon"><i class="fas fa-clock"></i></div>
+              <div>
+                <strong>Horario de atención</strong>
+                <span>Lun – Sáb: 7:00 am – 6:00 pm</span>
+                <span>Emergencias: 24/7</span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Redes sociales -->
+          <div class="contact__social">
+            <a href="https://facebook.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Facebook de AquaPura">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Instagram de AquaPura">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/company/aquapura" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de AquaPura">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://youtube.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="YouTube de AquaPura">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com/@aquapura" target="_blank" rel="noopener noreferrer" aria-label="TikTok de AquaPura">
+              <i class="fab fa-tiktok"></i>
+            </a>
           </div>
         </div>
 
-        <div class="card">
-          <h3>Reclamos sobre el Servicio Activos</h3>
-          <div class="chart-container">
-            <canvas id="chartReclamos"></canvas>
+        <!-- Mapa -->
+        <div class="contact__map">
+          <iframe
+            title="Ubicación de AquaPura en Google Maps"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.0!2d-77.03!3d-12.09!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA1JzM2LjAiUyA3N8KwMDEnNDguMCJX!5e0!3m2!1ses!2spe!4v1234567890"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA FINAL / BANNER
+    ============================================================ -->
+    <section class="cta-banner" aria-label="Llamada a la acción final">
+      <div class="container cta-banner__inner">
+        <div class="cta-banner__text">
+          <h2>¿Listo para garantizar agua pura en tu hogar?</h2>
+          <p>Únete a más de 15,000 familias que ya confían en AquaPura. Cotización gratuita en 24 horas.</p>
+        </div>
+        <div class="cta-banner__actions">
+          <a href="#cotizacion" class="btn btn--primary btn--lg">Solicitar Cotización Gratis</a>
+          <a href="https://wa.me/51900000000" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i> Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__grid">
+
+      <!-- Columna 1: Marca -->
+      <div class="footer__col footer__col--brand">
+        <a href="#inicio" class="footer__logo" aria-label="AquaPura inicio">
+          <span class="logo-icon"><i class="fas fa-droplet"></i></span>
+          <span class="logo-text">Aqua<strong>Pura</strong></span>
+        </a>
+        <p>Especialistas en servicios integrales de agua potable. Calidad, confianza y compromiso con tu bienestar desde 1998.</p>
+        <div class="footer__social">
+          <a href="https://facebook.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com/company/aquapura" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://youtube.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Servicios -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Servicios</h4>
+        <ul class="footer__links">
+          <li><a href="#servicios">Distribución de Agua</a></li>
+          <li><a href="#servicios">Instalación de Sistemas</a></li>
+          <li><a href="#servicios">Mantenimiento Preventivo</a></li>
+          <li><a href="#servicios">Purificación y Tratamiento</a></li>
+          <li><a href="#servicios">Cisternas y Tanques</a></li>
+          <li><a href="#servicios">Proyectos Industriales</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Empresa -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Empresa</h4>
+        <ul class="footer__links">
+          <li><a href="#nosotros">Quiénes somos</a></li>
+          <li><a href="#certificaciones">Certificaciones</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="blog/">Blog</a></li>
+          <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Soporte -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Soporte</h4>
+        <ul class="footer__links">
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#cotizacion">Solicitar cotización</a></li>
+          <li><a href="tel:+51900000000">Emergencias 24/7</a></li>
+          <li><a href="politica-privacidad.html">Política de privacidad</a></li>
+          <li><a href="terminos-y-condiciones.html">Términos y condiciones</a></li>
+          <li><a href="libro-reclamaciones.html">Libro de reclamaciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 5: Newsletter -->
+      <div class="footer__col footer__col--newsletter">
+        <h4 class="footer__heading">Mantente informado</h4>
+        <p>Suscríbete y recibe consejos, novedades y ofertas especiales.</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate aria-label="Formulario de suscripción al boletín">
+          <div class="newsletter-form__inner">
+            <label for="nl-email" class="sr-only">Correo electrónico</label>
+            <input type="email" id="nl-email" name="email" placeholder="tucorreo@ejemplo.com" required autocomplete="email" />
+            <button type="submit" aria-label="Suscribirse al boletín"><i class="fas fa-paper-plane"></i></button>
           </div>
-        </div>
-
+          <span class="newsletter-form__msg" role="status" aria-live="polite"></span>
+        </form>
       </div>
+
     </div>
-  </section>
 
-  <section id="servicios" class="features">
-    <div class="container">
-      <h2 class="section-title">Servicios en Línea y Orientación al Cliente</h2>
-      <div class="features-grid">
-        <div class="feature-item">
-          <i class="fas fa-laptop-house"></i>
-          <h3>Pague aquí su recibo</h3>
-          <p>Realiza el pago de tus servicios de forma rápida y 100% segura.</p>
-        </div>
-        <div class="feature-item">
-          <i class="fas fa-file-signature"></i>
-          <h3>Mesa de Partes Virtual</h3>
-          <p>Ingresa y realiza el seguimiento de documentos sin salir de casa.</p>
-        </div>
-        <div class="feature-item">
-          <i class="fas fa-clipboard-list"></i>
-          <h3>Consulta de Reclamos</h3>
-          <p>Presentación y seguimiento a reclamos de facturación y servicio.</p>
-        </div>
-        <div class="feature-item">
-          <i class="fas fa-envelope-open-text"></i>
-          <h3>Suscríbete al recibo digital</h3>
-          <p>Ayuda al medio ambiente recibiendo tu facturación directamente en tu correo.</p>
-        </div>
+    <!-- Pie del footer -->
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; <span id="currentYear"></span> AquaPura S.A.C. – Todos los derechos reservados.</p>
+        <p>RUC: 20123456789 &nbsp;|&nbsp; <a href="politica-privacidad.html">Privacidad</a> &nbsp;|&nbsp; <a href="terminos-y-condiciones.html">Términos</a> &nbsp;|&nbsp; <a href="mapa-del-sitio.html">Mapa del sitio</a></p>
       </div>
-    </div>
-  </section>
-
-  <section id="logros" class="logros">
-    <div class="container">
-      <h2 class="section-title">Logros que reflejan nuestro compromiso</h2>
-      <div class="logros-grid">
-        <div class="card">
-          <h3><i class="fas fa-leaf" style="color: #2a9d8f;"></i> Proyecto MERESE</h3>
-          <p><strong>Semillas de agua y esperanza:</strong> Impulsamos el trabajo de las comunidades altoandinas que protegen y reforestan nuestras fuentes de agua, retribuyendo sus acciones de conservación y uso sostenible de los ecosistemas.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-trophy" style="color: #e9c46a;"></i> Reconocimiento SUNASS</h3>
-          <p>Gracias a una gestión transparente, obtuvimos el <strong>4to Lugar</strong> en el Benchmarking Regulatorio Sunass 2025 (Grandes 2), elevando la calidad del servicio en cada rincón de nuestra jurisdicción.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-school" style="color: #e76f51;"></i> Educación sin Fugas</h3>
-          <p>Nuestro Gerente General lidera jornadas de la campaña "Educación sin fugas" en colegios de la provincia, fomentando una cultura de cuidado del agua.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="#">Portal de Transparencia</a>
-        <a href="#">Centros de Recaudación</a>
-        <a href="#">Trabaja con nosotros</a>
-        <a href="#">Normativa</a>
-      </div>
-      <p>© 2026 SEDACHIMBOTE S.A. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <script src="scripts.js"></script>
+  <!-- ============================================================
+       BOTÓN WHATSAPP FLOTANTE
+  ============================================================ -->
+  <a
+    href="https://wa.me/51900000000?text=Hola%2C%20me%20interesa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20agua%20potable."
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-float__tooltip">¿Necesitas ayuda?</span>
+  </a>
+
+  <!-- ============================================================
+       BOTÓN VOLVER ARRIBA
+  ============================================================ -->
+  <button class="back-to-top" id="backToTop" aria-label="Volver al inicio" hidden>
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ============================================================
+       CHATBOT CON IA (CLAUDE API)
+  ============================================================ -->
+
+  <!-- Botón para abrir/cerrar el chatbot -->
+  <button class="chatbot-toggle" id="chatbotToggle" aria-label="Abrir asistente virtual" aria-expanded="false" aria-controls="chatbotWindow">
+    <i class="fas fa-comments" id="chatbotOpenIcon"></i>
+    <i class="fas fa-xmark" id="chatbotCloseIcon" hidden></i>
+    <span class="chatbot-toggle__badge" id="chatbotBadge" hidden>1</span>
+  </button>
+
+  <!-- Ventana del chatbot -->
+  <div class="chatbot-window" id="chatbotWindow" hidden role="dialog" aria-label="Asistente virtual AquaPura" aria-modal="true">
+
+    <!-- Header del chat -->
+    <div class="chatbot-header">
+      <div class="chatbot-header__info">
+        <div class="chatbot-avatar" aria-hidden="true">
+          <i class="fas fa-droplet"></i>
+        </div>
+        <div>
+          <span class="chatbot-header__name">AquaBot</span>
+          <span class="chatbot-header__status">
+            <span class="status-dot"></span> En línea – IA AquaPura
+          </span>
+        </div>
+      </div>
+      <div class="chatbot-header__actions">
+        <button class="chatbot-action-btn" id="chatbotClear" title="Limpiar conversación" aria-label="Limpiar conversación">
+          <i class="fas fa-rotate-right"></i>
+        </button>
+        <button class="chatbot-action-btn" id="chatbotClose" title="Cerrar chat" aria-label="Cerrar chat">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div class="chatbot-messages" id="chatbotMessages" role="log" aria-live="polite" aria-label="Mensajes del chat">
+      <!-- El mensaje de bienvenida se inserta por JS -->
+    </div>
+
+    <!-- Sugerencias rápidas -->
+    <div class="chatbot-suggestions" id="chatbotSuggestions" aria-label="Preguntas sugeridas">
+      <button class="chatbot-suggestion" data-msg="¿Qué servicios ofrecen?">¿Qué servicios ofrecen?</button>
+      <button class="chatbot-suggestion" data-msg="¿Cómo solicito una cotización?">Solicitar cotización</button>
+      <button class="chatbot-suggestion" data-msg="¿Cuánto cuesta limpiar una cisterna?">Precio cisterna</button>
+      <button class="chatbot-suggestion" data-msg="¿Tienen atención de emergencias?">Emergencias 24/7</button>
+    </div>
+
+    <!-- Input -->
+    <div class="chatbot-input-area">
+      <div class="chatbot-input-wrap">
+        <label for="chatbotInput" class="sr-only">Escribe tu mensaje</label>
+        <textarea
+          id="chatbotInput"
+          class="chatbot-input"
+          placeholder="Escribe tu consulta..."
+          rows="1"
+          maxlength="500"
+          aria-label="Escribe tu mensaje al asistente"
+        ></textarea>
+        <button class="chatbot-send" id="chatbotSend" aria-label="Enviar mensaje" disabled>
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+      <p class="chatbot-disclaimer">Asistente virtual · Las respuestas son orientativas. Para casos específicos, contáctanos directamente.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================ -->
+  <script src="js/main.js" defer></script>
+  <script src="js/chatbot.js" defer></script>
+
 </body>
 </html>
