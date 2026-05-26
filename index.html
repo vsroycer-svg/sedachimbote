@@ -29,70 +29,10 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- ============================================================
-       BARRA DE AVISO SUPERIOR
-  ============================================================ -->
-  <div class="top-bar">
-    <div class="container">
-      <p>
-        <i class="fas fa-phone-alt"></i> Llámanos: <a href=" AQUAFONO 317-8000 ">AQUAFONO 317-8000 </a>
-        &nbsp;|&nbsp;
-        <i class="fas fa-envelope"></i> <a href="mailto:info@aquapura.pe">sedanet@sedapal.com.pe</a>
-        &nbsp;|&nbsp;
-        <a href="https://facebook.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://instagram.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://linkedin.com/company/aquapura" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.youtube.com/channel/UCeoOIz1cd5bWp5oTDanvBaw/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="https://api.whatsapp.com/send?phone=5113178000&text=Hola,%20tengo%20una%20consulta."target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-	  </p>
-    </div>
-  </div>
-
   <!-- ============================================================
        NAVEGACIÓN PRINCIPAL
   ============================================================ -->
-  <header class="navbar" id="navbar">
-    <div class="container navbar__inner">
-      <!-- Logo -->
-		<a href="#inicio" class="navbar__logo" aria-label="Sedachimbote inicio"><img src="assets/img/logoSedachimbote.png" alt="Logo Sedachimbote"class="navbar__logo-image">
-      <span class="logo-text">  <strong> </strong></span></a>
-
-      <!-- Menú principal -->
-      <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
-        <ul class="navbar__list">
-          <li><a href="#inicio" class="navbar__link active">Inicio</a></li>
-          <li><a href="#nosotros" class="navbar__link">Nosotros</a></li>
-          <li class="has-dropdown">
-            <a href="#servicios" class="navbar__link">Servicios <i class="fas fa-chevron-down"></i></a>
-            <ul class="dropdown">
-              <li><a href="#servicios">Distribución de Agua</a></li>
-              <li><a href="#servicios">Instalación de Sistemas</a></li>
-              <li><a href="#servicios">Mantenimiento</a></li>
-              <li><a href="#servicios">Purificación</a></li>
-              <li><a href="#servicios">Cisterna y Tanques</a></li>
-            </ul>
-          </li>
-          <li><a href="#proceso" class="navbar__link">Proceso</a></li>
-          <li><a href="#proyectos" class="navbar__link">Proyectos</a></li>
-          <li><a href="#certificaciones" class="navbar__link">Calidad</a></li>
-          <li><a href="#testimonios" class="navbar__link">Testimonios</a></li>
-          <li><a href="#blog" class="navbar__link">Blog</a></li>
-          <li><a href="#contacto" class="navbar__link">Contacto</a></li>
-        </ul>
-      </nav>
-
-      <!-- CTA + Hamburguesa -->
-      <div class="navbar__actions">
-        <a href="#cotizacion" class="btn btn--primary btn--sm">Solicitar Cotización</a>
-        <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
+  <div id="navbar-container"></div>
 
     <!-- ============================================================
          HERO / INICIO
@@ -1153,87 +1093,10 @@
   <!-- ============================================================
        FOOTER
   ============================================================ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__grid">
-
-      <!-- Columna 1: Marca -->
-      <div class="footer__col footer__col--brand">
-        <a href="#inicio" class="footer__logo" aria-label="AquaPura inicio">
-          <span class="logo-icon"><i class="fas fa-droplet"></i></span>
-          <span class="logo-text">Aqua<strong>Pura</strong></span>
-        </a>
-        <p>Especialistas en servicios integrales de agua potable. Calidad, confianza y compromiso con tu bienestar desde 1998.</p>
-        <div class="footer__social">
-          <a href="https://facebook.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://instagram.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://linkedin.com/company/aquapura" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://youtube.com/aquapura" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
-
-      <!-- Columna 2: Servicios -->
-      <div class="footer__col">
-        <h4 class="footer__heading">Servicios</h4>
-        <ul class="footer__links">
-          <li><a href="#servicios">Distribución de Agua</a></li>
-          <li><a href="#servicios">Instalación de Sistemas</a></li>
-          <li><a href="#servicios">Mantenimiento Preventivo</a></li>
-          <li><a href="#servicios">Purificación y Tratamiento</a></li>
-          <li><a href="#servicios">Cisternas y Tanques</a></li>
-          <li><a href="#servicios">Proyectos Industriales</a></li>
-        </ul>
-      </div>
-
-      <!-- Columna 3: Empresa -->
-      <div class="footer__col">
-        <h4 class="footer__heading">Empresa</h4>
-        <ul class="footer__links">
-          <li><a href="#nosotros">Quiénes somos</a></li>
-          <li><a href="#certificaciones">Certificaciones</a></li>
-          <li><a href="#proyectos">Proyectos</a></li>
-          <li><a href="#testimonios">Testimonios</a></li>
-          <li><a href="blog/">Blog</a></li>
-          <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
-        </ul>
-      </div>
-
-      <!-- Columna 4: Soporte -->
-      <div class="footer__col">
-        <h4 class="footer__heading">Soporte</h4>
-        <ul class="footer__links">
-          <li><a href="#faq">Preguntas frecuentes</a></li>
-          <li><a href="#cotizacion">Solicitar cotización</a></li>
-          <li><a href="tel:+51943678248">Emergencias 24/7</a></li>
-          <li><a href="politica-privacidad.html">Política de privacidad</a></li>
-          <li><a href="terminos-y-condiciones.html">Términos y condiciones</a></li>
-          <li><a href="libro-reclamaciones.html">Libro de reclamaciones</a></li>
-        </ul>
-      </div>
-
-      <!-- Columna 5: Newsletter -->
-      <div class="footer__col footer__col--newsletter">
-        <h4 class="footer__heading">Mantente informado</h4>
-        <p>Suscríbete y recibe consejos, novedades y ofertas especiales.</p>
-        <form class="newsletter-form" id="newsletterForm" novalidate aria-label="Formulario de suscripción al boletín">
-          <div class="newsletter-form__inner">
-            <label for="nl-email" class="sr-only">Correo electrónico</label>
-            <input type="email" id="nl-email" name="email" placeholder="tucorreo@ejemplo.com" required autocomplete="email" />
-            <button type="submit" aria-label="Suscribirse al boletín"><i class="fas fa-paper-plane"></i></button>
-          </div>
-          <span class="newsletter-form__msg" role="status" aria-live="polite"></span>
-        </form>
-      </div>
-
-    </div>
-
-    <!-- Pie del footer -->
-    <div class="footer__bottom">
-      <div class="container footer__bottom-inner">
-        <p>&copy; <span id="currentYear"></span> SEDACHIMBOTE S.A. Todos los derechos reservados.</p>
-        <p>RUC: 20123456789 &nbsp;|&nbsp; <a href="politica-privacidad.html">Privacidad</a> &nbsp;|&nbsp; <a href="terminos-y-condiciones.html">Términos</a> &nbsp;|&nbsp; <a href="mapa-del-sitio.html">Mapa del sitio</a></p>
-      </div>
-    </div>
-  </footer>
+ <!-- ============================================================
+     FOOTER
+============================================================ -->
+<div id="footer-container"></div>
 
   <!-- BOTON ASISTENTE VIRTUAL -->
 <a href="chat.html" class="chat-boton">
@@ -1322,6 +1185,7 @@
   ============================================================ -->
   <script src="scripts.js" defer></script>
   <script src="js/chatbot.js" defer></script>
+  <script src="js/loadcomponents.js" defer></script>
 
 </body>
 </html>
