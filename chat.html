@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Asistente Virtual</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="chat.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+</head>
+
+<body>
+
+    <!-- CONTENEDOR -->
+    <div class="chat-container">
+
+        <!-- PANEL DERECHO -->
+        <div class="chat-main">
+
+            <div class="chat-icon">
+                <i class="fa-regular fa-comment-dots"></i>
+            </div>
+
+            <h1>¡Hola!</h1>
+
+            <p>
+                Bienvenido al canal de soporte en línea.
+                Haz clic en el botón para hablar con un agente virtual.
+            </p>
+
+            <button class="start-chat-btn" id="openChat">
+                CHAT SEDACHIMBOTE
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- BOTON FLOTANTE -->
+    <div class="chat-float" id="floatChat">
+
+        <i class="fa-solid fa-comments"></i>
+
+    </div>
+
+    <!-- CHAT BOX -->
+    <div class="chat-box" id="chatBox">
+
+        <!-- HEADER -->
+        <div class="chat-header">
+
+            <h3>Asistente Virtual</h3>
+
+            <button class="close-chat" id="closeChat">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="chat-body" id="chatBody">
+
+            <div class="bot-message">
+
+                <div class="message-text">
+                    👋 Hola, ¿En qué puedo ayudarte?
+                </div>
+
+                <div class="message-hour">
+                    Sedachimbote · 15:31
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="chat-footer">
+
+            <!-- ARCHIVOS -->
+            <label for="fileInput" class="file-label">
+                <i class="fa-solid fa-paperclip"></i>
+            </label>
+
+            <input
+                type="file"
+                id="fileInput"
+                hidden
+                accept=".jpg,.png,.pdf,.doc,.docx,.mp4"
+            >
+
+            <!-- INPUT -->
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Escriba aquí su mensaje"
+            >
+
+            <!-- BOTON -->
+            <button id="sendBtn">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="chat.js"></script>
+
+</body>
+
+</html>

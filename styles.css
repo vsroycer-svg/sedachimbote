@@ -1251,3 +1251,49 @@ select{
   }
 
 }
+
+/* =========================================
+   BOTON FLOTANTE CHAT
+========================================= */
+
+.chat-boton{
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 80px;
+    height: 80px;
+    background: #0d6efd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 999;
+    transition: 0.3s;
+    animation: flotar 2s infinite ease-in-out;
+}
+
+.chat-boton:hover{
+    transform: scale(1.1);
+    background: #0b5ed7;
+}
+
+.chat-boton img{
+    width: 40px;
+    height: 40px;
+}
+
+/* Animacion */
+@keyframes flotar{
+    0%{
+        transform: translateY(0px);
+    }
+
+    50%{
+        transform: translateY(-8px);
+    }
+
+    100%{
+        transform: translateY(0px);
+    }
+}
