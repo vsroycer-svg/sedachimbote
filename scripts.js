@@ -1,71 +1,99 @@
-// Configuración general para que los gráficos sean responsive y usen la fuente del sitio
-Chart.defaults.maintainAspectRatio = false;
-Chart.defaults.font.family = "'Inter', sans-serif";
+// MENU MOBILE
 
-// Etiquetas de localidades basadas en la jurisdicción de SEDACHIMBOTE
-const localidades = ['Chimbote', 'Nvo. Chimbote', 'Casma', 'Huarmey'];
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
 
-// 1. Gráfico de Pagos Atrasados (Morosidad) - Gráfico de Barras
-const ctxMorosidad = document.getElementById('chartMorosidad');
-if (ctxMorosidad) {
-  new Chart(ctxMorosidad.getContext('2d'), {
-    type: 'bar',
-    data: {
-      labels: localidades,
-      datasets: [{
-        label: 'Usuarios con atraso',
-        data: [1200, 850, 420, 310], // Datos simulados, reemplazar con data real
-        backgroundColor: '#e63946',
-        borderRadius: 4
-      }]
-    },
-    options: {
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true } }
+hamburger.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+});
+
+// CONTADOR
+
+const counters = document.querySelectorAll("[data-count]");
+
+const animateCounter = (counter) => {
+  const target = +counter.dataset.count;
+  let current = 0;
+
+  const increment = target / 100;
+
+  const update = () => {
+    current += increment;
+
+    if(current < target){
+      counter.textContent = Math.floor(current);
+      requestAnimationFrame(update);
+    } else {
+      counter.textContent = target;
+    }
+  };
+
+  update();
+};
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      animateCounter(entry.target);
+      observer.unobserve(entry.target);
     }
   });
-}
+});
 
-// 2. Gráfico de Consumo Promedio - Gráfico de Líneas
-const ctxConsumo = document.getElementById('chartConsumo');
-if (ctxConsumo) {
-  new Chart(ctxConsumo.getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: localidades,
-      datasets: [{
-        label: 'Consumo (m³/mes)',
-        data: [18.5, 22.1, 15.3, 14.8], // Datos simulados, reemplazar con data real
-        borderColor: '#0056b3',
-        backgroundColor: 'rgba(0, 86, 179, 0.2)',
-        borderWidth: 3,
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: {
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true } }
-    }
-  });
-}
+counters.forEach(counter=>{
+  observer.observe(counter);
+});
 
-// 3. Gráfico de Reclamos - Gráfico de Anillo (Doughnut)
-const ctxReclamos = document.getElementById('chartReclamos');
-if (ctxReclamos) {
-  new Chart(ctxReclamos.getContext('2d'), {
-    type: 'doughnut',
-    data: {
-      labels: localidades,
-      datasets: [{
-        data: [350, 210, 85, 60], // Datos simulados, reemplazar con data real
-        backgroundColor: ['#0056b3', '#00b4d8', '#90e0ef', '#caf0f8'],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      plugins: { legend: { position: 'bottom' } },
-      cutout: '70%'
-    }
+// BOTON TOP
+
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", ()=>{
+
+  if(window.scrollY > 500){
+    backToTop.hidden = false;
+  }else{
+    backToTop.hidden = true;
+  }
+
+});
+
+backToTop.addEventListener("click", ()=>{
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
-}
+});
+
+// AÑO FOOTER
+
+document.getElementById("currentYear").textContent =
+new Date().getFullYear();
+
+// FILTRO PROYECTOS
+
+const filterBtns = document.querySelectorAll(".filter-btn");
+const projectCards = document.querySelectorAll(".project-card");
+
+filterBtns.forEach(btn=>{
+
+  btn.addEventListener("click", ()=>{
+
+    filterBtns.forEach(b=>b.classList.remove("filter-btn--active"));
+    btn.classList.add("filter-btn--active");
+
+    const filter = btn.dataset.filter;
+
+    projectCards.forEach(card=>{
+
+      if(filter === "all" || card.dataset.category === filter){
+        card.style.display = "block";
+      }else{
+        card.style.display = "none";
+      }
+
+    });
+
+  });
+
+});
