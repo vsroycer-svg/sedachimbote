@@ -5,29 +5,228 @@
 .footer{
   background:#0f172a;
   color:#fff;
-  padding-top:5rem;
+
+  padding-top:80px;   /* ALTURA SUPERIOR */
+  padding-bottom:0;
 }
+
+/* =========================================================
+   GRID PRINCIPAL
+========================================================= */
 
 .footer__grid{
   display:grid;
+
   grid-template-columns:
     repeat(auto-fit,minmax(220px,1fr));
 
-  gap:3rem;
+  gap:60px; /* ESPACIO ENTRE COLUMNAS */
+
+  padding-bottom:60px;
 }
 
+/* =========================================================
+   COLUMNAS
+========================================================= */
+
+.footer__col{
+  display:flex;
+  flex-direction:column;
+}
+
+/* COLUMNA PRINCIPAL */
+
+.footer__col--brand{
+  max-width:350px; /* ANCHO DE LA COLUMNA LOGO */
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.footer__logo{
+  display:flex;
+  align-items:center;
+
+  margin-bottom:25px;
+}
+
+/* IMAGEN LOGO */
+
+.footer__logo-image{
+  height:70px; /* TAMAÑO DEL LOGO */
+  width:auto;
+
+  object-fit:contain;
+}
+
+/* TEXTO LOGO */
+
+.logo-text{
+  font-size:28px; /* TAMAÑO TEXTO LOGO */
+  font-weight:700;
+  line-height:1.1;
+}
+
+/* =========================================================
+   TEXTO DESCRIPCIÓN
+========================================================= */
+
+.footer__col p{
+  font-size:15px;
+  line-height:1.8;
+
+  color:#cbd5e1;
+
+  margin-bottom:30px;
+}
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
 .footer__heading{
-  margin-bottom:1rem;
+  font-size:20px; /* TAMAÑO TÍTULO */
+  font-weight:700;
+
+  margin-bottom:25px;
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.footer__links{
+  list-style:none;
 }
 
 .footer__links li{
-  margin-bottom:.8rem;
+  margin-bottom:14px; /* ESPACIO LINKS */
 }
+
+.footer__links a{
+  color:#cbd5e1;
+
+  text-decoration:none;
+
+  font-size:15px; /* TAMAÑO LINKS */
+
+  transition:.3s ease;
+}
+
+.footer__links a:hover{
+  color:#fff;
+  padding-left:5px;
+}
+
+/* =========================================================
+   REDES SOCIALES
+========================================================= */
+
+.footer__social{
+  display:flex;
+  align-items:center;
+
+  gap:15px;
+}
+
+.footer__social a{
+  width:42px;   /* TAMAÑO BOTÓN RED SOCIAL */
+  height:42px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(255,255,255,.08);
+
+  color:#fff;
+
+  font-size:16px;
+
+  transition:.3s ease;
+}
+
+.footer__social a:hover{
+  background:var(--primary);
+
+  transform:translateY(-3px);
+}
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
 
 .footer__bottom{
   border-top:1px solid rgba(255,255,255,.1);
-  margin-top:4rem;
-  padding:2rem 0;
-  text-align:center;
+
+  padding:30px 0;
+}
+
+.footer__bottom-inner{
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  gap:20px;
+
+  flex-wrap:wrap;
+}
+
+.footer__bottom p{
   color:#cbd5e1;
+
+  font-size:14px;
+}
+
+.footer__bottom a{
+  color:#fff;
+  text-decoration:none;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:992px){
+
+  .footer{
+    padding-top:60px;
+  }
+
+  .footer__grid{
+    gap:40px;
+  }
+
+  .logo-text{
+    font-size:24px;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .footer{
+    padding-top:50px;
+  }
+
+  .footer__grid{
+    grid-template-columns:1fr;
+
+    gap:35px;
+  }
+
+  .footer__bottom-inner{
+    flex-direction:column;
+
+    text-align:center;
+  }
+
+  .footer__heading{
+    font-size:18px;
+  }
+
 }
