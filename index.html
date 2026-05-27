@@ -187,12 +187,7 @@
 
   </div>
 
-</section>
-
-    <!-- ============================================================
-         NOSOTROS
-    ============================================================ -->
-    
+</section>    
 
     <!-- ============================================================
          SERVICIOS
@@ -588,95 +583,11 @@
     </section>
   </main>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
  <!-- ============================================================
      FOOTER
 ============================================================ -->
 <div id="footer-container"></div>
 
-  <!-- BOTON ASISTENTE VIRTUAL -->
-<a href="chat.html" class="chat-boton">
-    <img src="img/chat.png" alt="Chat">
-</a>
-
-  <!-- ============================================================
-       BOTÓN VOLVER ARRIBA
-  ============================================================ -->
-  <button class="back-to-top" id="backToTop" aria-label="Volver al inicio" hidden>
-    <i class="fas fa-chevron-up"></i>
-  </button>
-
-  <!-- ============================================================
-       CHATBOT CON IA (CLAUDE API)
-  ============================================================ -->
-
-  <!-- Botón para abrir/cerrar el chatbot -->
-  <button class="chatbot-toggle" id="chatbotToggle" aria-label="Abrir asistente virtual" aria-expanded="false" aria-controls="chatbotWindow">
-    <i class="fas fa-comments" id="chatbotOpenIcon"></i>
-    <i class="fas fa-xmark" id="chatbotCloseIcon" hidden></i>
-    <span class="chatbot-toggle__badge" id="chatbotBadge" hidden>1</span>
-  </button>
-
-  <!-- Ventana del chatbot -->
-  <div class="chatbot-window" id="chatbotWindow" hidden role="dialog" aria-label="Asistente virtual AquaPura" aria-modal="true">
-
-    <!-- Header del chat -->
-    <div class="chatbot-header">
-      <div class="chatbot-header__info">
-        <div class="chatbot-avatar" aria-hidden="true">
-          <i class="fas fa-droplet"></i>
-        </div>
-        <div>
-          <span class="chatbot-header__name">AquaBot</span>
-          <span class="chatbot-header__status">
-            <span class="status-dot"></span> En línea – IA AquaPura
-          </span>
-        </div>
-      </div>
-      <div class="chatbot-header__actions">
-        <button class="chatbot-action-btn" id="chatbotClear" title="Limpiar conversación" aria-label="Limpiar conversación">
-          <i class="fas fa-rotate-right"></i>
-        </button>
-        <button class="chatbot-action-btn" id="chatbotClose" title="Cerrar chat" aria-label="Cerrar chat">
-          <i class="fas fa-xmark"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mensajes -->
-    <div class="chatbot-messages" id="chatbotMessages" role="log" aria-live="polite" aria-label="Mensajes del chat">
-      <!-- El mensaje de bienvenida se inserta por JS -->
-    </div>
-
-    <!-- Sugerencias rápidas -->
-    <div class="chatbot-suggestions" id="chatbotSuggestions" aria-label="Preguntas sugeridas">
-      <button class="chatbot-suggestion" data-msg="¿Qué servicios ofrecen?">¿Qué servicios ofrecen?</button>
-      <button class="chatbot-suggestion" data-msg="¿Cómo solicito una cotización?">Solicitar cotización</button>
-      <button class="chatbot-suggestion" data-msg="¿Cuánto cuesta limpiar una cisterna?">Precio cisterna</button>
-      <button class="chatbot-suggestion" data-msg="¿Tienen atención de emergencias?">Emergencias 24/7</button>
-    </div>
-
-    <!-- Input -->
-    <div class="chatbot-input-area">
-      <div class="chatbot-input-wrap">
-        <label for="chatbotInput" class="sr-only">Escribe tu mensaje</label>
-        <textarea
-          id="chatbotInput"
-          class="chatbot-input"
-          placeholder="Escribe tu consulta..."
-          rows="1"
-          maxlength="500"
-          aria-label="Escribe tu mensaje al asistente"
-        ></textarea>
-        <button class="chatbot-send" id="chatbotSend" aria-label="Enviar mensaje" disabled>
-          <i class="fas fa-paper-plane"></i>
-        </button>
-      </div>
-      <p class="chatbot-disclaimer">Asistente virtual · Las respuestas son orientativas. Para casos específicos, contáctanos directamente.</p>
-    </div>
-  </div>
 
   <!-- ============================================================
        SCRIPTS
