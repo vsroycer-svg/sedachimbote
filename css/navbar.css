@@ -1,0 +1,161 @@
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.top-bar{
+  background:var(--secondary);
+  color:#fff;
+  padding:.7rem 0;
+  font-size:.9rem;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+  height:60px;
+  display:flex;
+  align-items:center;
+}
+
+.navbar__inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 0;
+}
+
+.navbar__logo{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  font-size:1.4rem;
+  font-weight:800;
+  margin-right:2rem;
+  color:#0f172a;
+}
+
+.navbar__logo-image{
+  height:40px;
+  width:auto;
+  object-fit:contain;
+}
+
+.navbar__list{
+  display:flex;
+  gap:1.5rem;
+}
+
+.navbar__link{
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.navbar__link:hover,
+.navbar__link.active{
+  color:var(--primary);
+}
+
+.navbar__actions{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.navbar__hamburger{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.navbar__hamburger span{
+  display:block;
+  width:25px;
+  height:3px;
+  background:#111;
+  margin:5px 0;
+}
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.has-dropdown{
+  position:relative;
+}
+
+.dropdown{
+  position:absolute;
+  top:100%;
+  left:0;
+  min-width:250px;
+  background:white;
+  border-radius:16px;
+  padding:.8rem 0;
+  box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(15px);
+
+  transition:.3s ease;
+  z-index:1000;
+}
+
+.has-dropdown:hover .dropdown{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.dropdown a{
+  display:block;
+  padding:1rem 1.4rem;
+  color:#111827;
+  font-weight:500;
+  transition:.25s ease;
+}
+
+.dropdown a:hover{
+  background:#f3f4f6;
+  color:#0ea5e9;
+  padding-left:1.8rem;
+}
+
+/* =========================================================
+   RESPONSIVE NAVBAR
+========================================================= */
+
+@media(max-width:992px){
+
+  .navbar__menu{
+    position:fixed;
+    top:80px;
+    right:-100%;
+    width:300px;
+    height:100vh;
+    background:#fff;
+    transition:.3s ease;
+    padding:2rem;
+  }
+
+  .navbar__menu.active{
+    right:0;
+  }
+
+  .navbar__list{
+    flex-direction:column;
+  }
+
+  .navbar__hamburger{
+    display:block;
+  }
+
+}
