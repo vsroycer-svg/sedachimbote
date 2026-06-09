@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEDACHIMBOTE - Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    display:flex;
+    background:#eef2f5;
+}
+
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#0b84d8;
+    color:white;
+    position:fixed;
+}
+
+.logo{
+    text-align:center;
+    padding:30px 20px;
+}
+
+.logo h2{
+    margin-top:10px;
+}
+
+.menu{
+    margin-top:20px;
+}
+
+.menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:18px 25px;
+    transition:.3s;
+}
+
+.menu a:hover{
+    background:#0a6db1;
+}
+
+.main{
+    margin-left:260px;
+    width:100%;
+    padding:30px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.search{
+    width:300px;
+    padding:10px;
+    border:none;
+    border-radius:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.card h3{
+    color:#555;
+}
+
+.card p{
+    font-size:40px;
+    color:#0b84d8;
+    font-weight:bold;
+}
+
+.chart{
+    background:white;
+    margin-top:30px;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.bars{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    height:300px;
+    margin-top:30px;
+}
+
+.bar{
+    width:80px;
+    background:#0b84d8;
+    border-radius:10px 10px 0 0;
+}
+
+.info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:30px;
+}
+
+.box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+ul{
+    margin-top:15px;
+    padding-left:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        <h2>SEDACHIMBOTE</h2>
+        <p>Administrador</p>
+    </div>
+
+    <div class="menu">
+        <a href="index.html">🏠 Dashboard</a>
+        <a href="crm.html">👥 CRM Clientes</a>
+        <a href="erp.html">📦 ERP Gestión</a>
+
+        <a href="#">💧 Facturación y Cobranza</a>
+        <a href="#">🚰 Gestión de Redes</a>
+        <a href="#">🔧 Mantenimiento</a>
+        <a href="#">📊 Reportes</a>
+        <a href="#">⚙️ Configuración</a>
+    </div>
+
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <h1>Dashboard General</h1>
+        <input type="text" class="search" placeholder="Buscar cliente, recibo o trámite">
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Usuarios Activos</h3>
+            <p>12,580</p>
+        </div>
+
+        <div class="card">
+            <h3>Recibos Emitidos</h3>
+            <p>8,450</p>
+        </div>
+
+        <div class="card">
+            <h3>Pagos del Mes</h3>
+            <p>6,920</p>
+        </div>
+
+        <div class="card">
+            <h3>Reclamos Pendientes</h3>
+            <p>124</p>
+        </div>
+
+    </div>
+
+    <div class="chart">
+        <h2>Consumo de Agua - Últimos 6 Meses</h2>
+
+        <div class="bars">
+            <div class="bar" style="height:140px;"></div>
+            <div class="bar" style="height:220px;"></div>
+            <div class="bar" style="height:180px;"></div>
+            <div class="bar" style="height:250px;"></div>
+            <div class="bar" style="height:210px;"></div>
+            <div class="bar" style="height:280px;"></div>
+        </div>
+    </div>
+
+    <div class="info">
+
+        <div class="box">
+            <h2>Avisos Importantes</h2>
+
+            <ul>
+                <li>Corte programado en Nuevo Chimbote.</li>
+                <li>Mantenimiento de redes el sábado.</li>
+                <li>Actualización de datos de usuarios.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Atención al Cliente</h2>
+
+            <ul>
+                <li>Reclamos recibidos: 512</li>
+                <li>Reclamos resueltos: 450</li>
+                <li>Solicitudes de conexión: 128</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
