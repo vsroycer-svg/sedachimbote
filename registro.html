@@ -4,21 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro de Usuario | Sedachimbote</title>
-  <meta name="description" content="Crea tu cuenta en Sedachimbote y accede a todos nuestros servicios digitales." />
-  
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing: border-box; }
     body {
       font-family: 'DM Sans', sans-serif;
       background: linear-gradient(145deg, #f0f9ff 0%, #e0f0fa 100%);
@@ -28,65 +17,27 @@
       justify-content: center;
       padding: 2rem;
     }
-
-    .register-container {
-      max-width: 520px;
-      width: 100%;
-      margin: 2rem auto;
-    }
-
+    .register-container { max-width: 520px; width: 100%; margin: 2rem auto; }
     .register-card {
-      background: rgba(255, 255, 255, 0.97);
+      background: rgba(255,255,255,0.97);
       backdrop-filter: blur(2px);
       border-radius: 2rem;
-      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25);
       overflow: hidden;
-      transition: transform 0.2s;
-      border: 1px solid rgba(72, 187, 255, 0.3);
+      border: 1px solid rgba(72,187,255,0.3);
     }
-
     .register-header {
       background: linear-gradient(135deg, #0077b6, #023e8a);
       padding: 2rem 1.5rem;
       text-align: center;
       color: white;
     }
-
-    .register-header h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .register-header p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    .register-body {
-      padding: 2rem 1.8rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.3rem;
-    }
-
-    .form-group label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: #1e2a3e;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-    }
-
-    .form-group label i {
-      color: #0077b6;
-      width: 20px;
-    }
-
+    .register-header h1 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .register-header p { font-size: 0.9rem; opacity: 0.9; }
+    .register-body { padding: 2rem 1.8rem; }
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #1e2a3e; margin-bottom: 8px; font-size: 0.9rem; }
+    .form-group label i { color: #0077b6; width: 20px; }
     .form-group input {
       width: 100%;
       padding: 12px 16px;
@@ -97,32 +48,10 @@
       transition: all 0.2s;
       background: #fff;
     }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #0077b6;
-      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
-    }
-
-    .checkbox-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 1.2rem 0;
-    }
-
-    .checkbox-group input {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-
-    .checkbox-group label {
-      font-size: 0.85rem;
-      color: #334155;
-      cursor: pointer;
-    }
-
+    .form-group input:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.2); }
+    .checkbox-group { display: flex; align-items: center; gap: 10px; margin: 1.2rem 0; }
+    .checkbox-group input { width: 18px; height: 18px; cursor: pointer; }
+    .checkbox-group label { font-size: 0.85rem; color: #334155; cursor: pointer; }
     .btn-register {
       width: 100%;
       background: linear-gradient(95deg, #0077b6, #0096c7);
@@ -142,83 +71,39 @@
       gap: 10px;
       box-shadow: 0 8px 18px rgba(0,119,182,0.3);
     }
-
-    .btn-register:hover {
-      background: linear-gradient(95deg, #023e8a, #0077b6);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 22px rgba(0,119,182,0.4);
-    }
-
-    .login-link {
-      text-align: center;
-      margin-top: 1.8rem;
-      font-size: 0.9rem;
-      color: #1e2a3e;
-    }
-
-    .login-link a {
-      color: #0077b6;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .login-link a:hover {
-      text-decoration: underline;
-    }
-
-    .back-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 1rem;
-      color: #023e8a;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-
-    .back-home:hover {
-      gap: 12px;
-      color: #0077b6;
-    }
-
-    .error-msg {
-      color: #dc2626;
-      font-size: 0.75rem;
-      margin-top: 5px;
-      display: none;
-    }
-
-    .success-toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
+    .btn-register:hover { background: linear-gradient(95deg, #023e8a, #0077b6); transform: translateY(-2px); }
+    .login-link { text-align: center; margin-top: 1.8rem; font-size: 0.9rem; color: #1e2a3e; }
+    .login-link a { color: #0077b6; font-weight: 600; text-decoration: none; }
+    .login-link a:hover { text-decoration: underline; }
+    .back-home { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1rem; color: #023e8a; text-decoration: none; font-weight: 500; transition: 0.2s; }
+    .back-home:hover { gap: 12px; color: #0077b6; }
+    .error-msg { color: #dc2626; font-size: 0.75rem; margin-top: 5px; display: none; }
+    .success-message {
       background: #059669;
       color: white;
-      padding: 12px 24px;
-      border-radius: 60px;
-      font-weight: 500;
-      z-index: 999;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      padding: 1rem;
+      border-radius: 1rem;
+      text-align: center;
+      margin-top: 1rem;
       display: none;
-      align-items: center;
-      gap: 10px;
     }
-
-    @media (max-width: 550px) {
-      body { padding: 1rem; }
-      .register-body { padding: 1.5rem; }
+    .btn-success {
+      display: inline-block;
+      background: white;
+      color: #059669;
+      padding: 8px 20px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: 0.2s;
     }
+    .btn-success:hover { background: #f0fdf4; transform: scale(1.02); }
   </style>
 </head>
 <body>
-
 <div class="register-container">
-  <a href="index.html" class="back-home">
-    <i class="fas fa-arrow-left"></i> Volver al inicio
-  </a>
-  
+  <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
   <div class="register-card">
     <div class="register-header">
       <h1><i class="fas fa-user-plus"></i> Crear cuenta</h1>
@@ -231,162 +116,101 @@
           <input type="text" id="fullname" placeholder="Ej: Ana María Pérez" required>
           <div class="error-msg" id="error-name"></div>
         </div>
-        
         <div class="form-group">
           <label><i class="fas fa-envelope"></i> Correo electrónico</label>
           <input type="email" id="email" placeholder="tu@email.com" required>
           <div class="error-msg" id="error-email"></div>
         </div>
-        
         <div class="form-group">
           <label><i class="fas fa-phone"></i> Teléfono (opcional)</label>
           <input type="tel" id="phone" placeholder="+51 999 888 777">
         </div>
-        
         <div class="form-group">
           <label><i class="fas fa-lock"></i> Contraseña</label>
           <input type="password" id="password" placeholder="Mínimo 6 caracteres" required>
           <div class="error-msg" id="error-password"></div>
         </div>
-        
         <div class="form-group">
           <label><i class="fas fa-check-circle"></i> Confirmar contraseña</label>
           <input type="password" id="confirmPassword" placeholder="Repite tu contraseña" required>
           <div class="error-msg" id="error-confirm"></div>
         </div>
-        
         <div class="checkbox-group">
           <input type="checkbox" id="terms" required>
-          <label for="terms">Acepto los <a href="#" style="color:#0077b6;">Términos y Condiciones</a> y políticas de privacidad.</label>
+          <label for="terms">Acepto los <a href="#" style="color:#0077b6;">Términos y Condiciones</a></label>
         </div>
-        
-        <button type="submit" class="btn-register">
-          <i class="fas fa-user-check"></i> Registrarme
-        </button>
+        <button type="submit" class="btn-register"><i class="fas fa-user-check"></i> Registrarme</button>
       </form>
       
+      <!-- Mensaje de éxito con botón manual -->
+      <div id="successMessage" class="success-message">
+        <i class="fas fa-check-circle"></i> ¡Registro exitoso!<br>
+        <a href="login.html" class="btn-success">Ir a Iniciar Sesión</a>
+      </div>
+      
       <div class="login-link">
-        ¿Ya tienes una cuenta? <a href="registro.html?login=true">Inicia sesión aquí</a> 
-        <span style="font-size:0.75rem; display:block; margin-top:5px;">(Próximamente habilitado)</span>
+        ¿Ya tienes cuenta? <a href="login.html" id="loginLink">Inicia sesión aquí</a>
       </div>
     </div>
   </div>
 </div>
 
-<div id="successToast" class="success-toast">
-  <i class="fas fa-circle-check"></i> ¡Registro exitoso! Redirigiendo...
-</div>
-
 <script>
   document.getElementById('registerForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
-    // Elementos del formulario
     const fullname = document.getElementById('fullname');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
     const terms = document.getElementById('terms');
-
-    // Elementos de error
     const nameError = document.getElementById('error-name');
     const emailError = document.getElementById('error-email');
     const passError = document.getElementById('error-password');
     const confirmError = document.getElementById('error-confirm');
-
-    // Limpiar errores previos
-    function clearErrors() {
-      nameError.style.display = 'none';
-      emailError.style.display = 'none';
-      passError.style.display = 'none';
-      confirmError.style.display = 'none';
-      nameError.textContent = '';
-      emailError.textContent = '';
-      passError.textContent = '';
-      confirmError.textContent = '';
-    }
-    clearErrors();
-
-    function showError(element, message) {
-      element.textContent = message;
-      element.style.display = 'block';
-    }
-
-    function isValidEmail(emailStr) {
-      return /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(emailStr);
-    }
-
-    let isValid = true;
-
-    // Validar nombre
-    if (!fullname.value.trim()) {
-      showError(nameError, 'El nombre completo es obligatorio');
-      isValid = false;
-    } else if (fullname.value.trim().length < 3) {
-      showError(nameError, 'Ingresa al menos 3 caracteres');
-      isValid = false;
-    }
-
-    // Validar email
-    const emailVal = email.value.trim();
-    if (!emailVal) {
-      showError(emailError, 'El correo electrónico es requerido');
-      isValid = false;
-    } else if (!isValidEmail(emailVal)) {
-      showError(emailError, 'Ingresa un correo válido (ej: nombre@dominio.com)');
-      isValid = false;
-    }
-
-    // Validar contraseña
-    const pwd = password.value;
-    if (!pwd) {
-      showError(passError, 'La contraseña es obligatoria');
-      isValid = false;
-    } else if (pwd.length < 6) {
-      showError(passError, 'La contraseña debe tener al menos 6 caracteres');
-      isValid = false;
-    }
-
-    // Confirmar contraseña
-    if (confirmPassword.value !== pwd) {
-      showError(confirmError, 'Las contraseñas no coinciden');
-      isValid = false;
-    }
-
-    // Términos y condiciones
-    if (!terms.checked) {
-      showError(confirmError, 'Debes aceptar los términos y condiciones');
-      isValid = false;
-    }
-
-    if (!isValid) return;
-
-    // --- LÓGICA DE GUARDADO (con validación de email duplicado) ---
-    let usuarios = JSON.parse(localStorage.getItem('usuarios_sedachimbote')) || [];
+    const successDiv = document.getElementById('successMessage');
     
-    // Verificar si el email ya está registrado
-    const emailExiste = usuarios.some(u => u.email === emailVal);
-    if (emailExiste) {
+    function clearErrors() {
+      [nameError, emailError, passError, confirmError].forEach(err => {
+        err.style.display = 'none';
+        err.textContent = '';
+      });
+    }
+    function showError(el, msg) { el.textContent = msg; el.style.display = 'block'; }
+    function isValidEmail(str) { return /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(str); }
+    
+    clearErrors();
+    successDiv.style.display = 'none';
+    let valid = true;
+    
+    if (!fullname.value.trim()) { showError(nameError, 'Nombre completo obligatorio'); valid = false; }
+    else if (fullname.value.trim().length < 3) { showError(nameError, 'Mínimo 3 caracteres'); valid = false; }
+    
+    const emailVal = email.value.trim();
+    if (!emailVal) { showError(emailError, 'Correo requerido'); valid = false; }
+    else if (!isValidEmail(emailVal)) { showError(emailError, 'Correo inválido'); valid = false; }
+    
+    const pwd = password.value;
+    if (!pwd) { showError(passError, 'Contraseña obligatoria'); valid = false; }
+    else if (pwd.length < 6) { showError(passError, 'Mínimo 6 caracteres'); valid = false; }
+    
+    if (confirmPassword.value !== pwd) { showError(confirmError, 'Las contraseñas no coinciden'); valid = false; }
+    if (!terms.checked) { showError(confirmError, 'Acepta los términos'); valid = false; }
+    if (!valid) return;
+    
+    // Guardar usuario
+    let usuarios = JSON.parse(localStorage.getItem('usuarios_sedachimbote')) || [];
+    if (usuarios.some(u => u.email === emailVal)) {
       showError(emailError, 'Este correo ya está registrado. Inicia sesión.');
       return;
     }
-
-    // Guardar nuevo usuario
-    const nuevoUsuario = {
-      id: Date.now(),
-      nombre: fullname.value.trim(),
-      email: emailVal,
-      password: pwd   // En un entorno real deberías cifrar la contraseña
-    };
+    const nuevoUsuario = { id: Date.now(), nombre: fullname.value.trim(), email: emailVal, password: pwd };
     usuarios.push(nuevoUsuario);
     localStorage.setItem('usuarios_sedachimbote', JSON.stringify(usuarios));
-
-    // Mostrar mensaje de éxito y redirigir a login.html
-    const toast = document.getElementById('successToast');
-    toast.style.display = 'flex';
-    setTimeout(() => {
-      window.location.href = 'login.html';
-    }, 1500);
+    
+    // Mostrar mensaje de éxito con botón manual
+    successDiv.style.display = 'block';
+    // Opcional: limpiar formulario
+    document.getElementById('registerForm').reset();
   });
 </script>
 </body>
