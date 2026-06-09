@@ -69,7 +69,44 @@ backToTop.addEventListener("click", ()=>{
 
 document.getElementById("currentYear").textContent =
 new Date().getFullYear();
+// ========== GESTIÓN DE SESIÓN ==========
+function actualizarInterfazUsuario() {
+  const authArea = document.getElementById('auth-area');
+  if (!authArea) return;
 
+  const usuarioActivo = localStorage.getItem('usuario_activo');
+  if (usuarioActivo) {
+    const usuario = JSON.parse(usuarioActivo);
+    // Mostrar nombre + cerrar sesión
+    authArea.innerHTML = `
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span>Hola, ${usuario.nombre.split(' ')[0]}</span>
+        <button id="cerrarSesionBtn" class="btn-logout">
+          <i class="fas fa-sign-out-alt"></i> Salir
+        </button>
+      </div>
+    `;
+    const btnCerrar = document.getElementById('cerrarSesionBtn');
+    if (btnCerrar) {
+      btnCerrar.addEventListener('click', () => {
+        localStorage.removeItem('usuario_activo');
+        actualizarInterfazUsuario();  // refrescar
+        window.location.reload();      // recargar para volver al estado inicial
+      });
+    }
+  } else {
+    // Mostrar botón de Acceder / Registrarse
+    authArea.innerHTML = `
+      <a href="registro.html" class="btn-login">
+        <i class="fas fa-user-circle"></i> Acceder / Registrarse
+      </a>
+    `;
+  }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', actualizarInterfazUsuario);
 // FILTRO PROYECTOS
 
 const filterBtns = document.querySelectorAll(".filter-btn");

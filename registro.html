@@ -278,19 +278,23 @@
 </div>
 
 <script>
-  (function() {
-    const form = document.getElementById('registerForm');
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Elementos del formulario
     const fullname = document.getElementById('fullname');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
     const terms = document.getElementById('terms');
-    
+
+    // Elementos de error
     const nameError = document.getElementById('error-name');
     const emailError = document.getElementById('error-email');
     const passError = document.getElementById('error-password');
     const confirmError = document.getElementById('error-confirm');
-    
+
+    // Limpiar errores previos
     function clearErrors() {
       nameError.style.display = 'none';
       emailError.style.display = 'none';
@@ -301,82 +305,89 @@
       passError.textContent = '';
       confirmError.textContent = '';
     }
-    
+    clearErrors();
+
     function showError(element, message) {
       element.textContent = message;
       element.style.display = 'block';
     }
-    
+
     function isValidEmail(emailStr) {
       return /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(emailStr);
     }
+
+    let isValid = true;
+
+    // Validar nombre
+    if (!fullname.value.trim()) {
+      showError(nameError, 'El nombre completo es obligatorio');
+      isValid = false;
+    } else if (fullname.value.trim().length < 3) {
+      showError(nameError, 'Ingresa al menos 3 caracteres');
+      isValid = false;
+    }
+
+    // Validar email
+    const emailVal = email.value.trim();
+    if (!emailVal) {
+      showError(emailError, 'El correo electrónico es requerido');
+      isValid = false;
+    } else if (!isValidEmail(emailVal)) {
+      showError(emailError, 'Ingresa un correo válido (ej: nombre@dominio.com)');
+      isValid = false;
+    }
+
+    // Validar contraseña
+    const pwd = password.value;
+    if (!pwd) {
+      showError(passError, 'La contraseña es obligatoria');
+      isValid = false;
+    } else if (pwd.length < 6) {
+      showError(passError, 'La contraseña debe tener al menos 6 caracteres');
+      isValid = false;
+    }
+
+    // Confirmar contraseña
+    if (confirmPassword.value !== pwd) {
+      showError(confirmError, 'Las contraseñas no coinciden');
+      isValid = false;
+    }
+
+    // Términos y condiciones
+    if (!terms.checked) {
+      showError(confirmError, 'Debes aceptar los términos y condiciones');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    // --- LÓGICA DE GUARDADO (con validación de email duplicado) ---
+    let usuarios = JSON.parse(localStorage.getItem('usuarios_sedachimbote')) || [];
     
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      clearErrors();
-      let isValid = true;
-      
-      // Validar nombre
-      if (!fullname.value.trim()) {
-        showError(nameError, 'El nombre completo es obligatorio');
-        isValid = false;
-      } else if (fullname.value.trim().length < 3) {
-        showError(nameError, 'Ingresa al menos 3 caracteres');
-        isValid = false;
-      }
-      
-      // Validar email
-      if (!email.value.trim()) {
-        showError(emailError, 'El correo electrónico es requerido');
-        isValid = false;
-      } else if (!isValidEmail(email.value.trim())) {
-        showError(emailError, 'Ingresa un correo válido (ej: nombre@dominio.com)');
-        isValid = false;
-      }
-      
-      // Validar contraseña
-      const pwd = password.value;
-      if (!pwd) {
-        showError(passError, 'La contraseña es obligatoria');
-        isValid = false;
-      } else if (pwd.length < 6) {
-        showError(passError, 'La contraseña debe tener al menos 6 caracteres');
-        isValid = false;
-      }
-      
-      // Confirmar contraseña
-      if (confirmPassword.value !== pwd) {
-        showError(confirmError, 'Las contraseñas no coinciden');
-        isValid = false;
-      }
-      
-      // Términos
-      if (!terms.checked) {
-        showError(confirmError, 'Debes aceptar los términos y condiciones'); // reuse confirm error area
-        document.getElementById('error-confirm').textContent = 'Debes aceptar los términos y condiciones';
-        document.getElementById('error-confirm').style.display = 'block';
-        isValid = false;
-      }
-      
-      if (isValid) {
-        // Simular registro exitoso
-        const toast = document.getElementById('successToast');
-        toast.style.display = 'flex';
-        
-        // Guardar un flag en localStorage simulando usuario registrado (opcional demo)
-        const userData = {
-          name: fullname.value.trim(),
-          email: email.value.trim(),
-          registeredAt: new Date().toISOString()
-        };
-        localStorage.setItem('sedachimbote_user', JSON.stringify(userData));
-        
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 2000);
-      }
-    });
-  })();
+    // Verificar si el email ya está registrado
+    const emailExiste = usuarios.some(u => u.email === emailVal);
+    if (emailExiste) {
+      showError(emailError, 'Este correo ya está registrado. Inicia sesión.');
+      return;
+    }
+
+    // Guardar nuevo usuario
+    const nuevoUsuario = {
+      id: Date.now(),
+      nombre: fullname.value.trim(),
+      email: emailVal,
+      password: pwd   // En un entorno real deberías cifrar la contraseña
+    };
+    usuarios.push(nuevoUsuario);
+    localStorage.setItem('usuarios_sedachimbote', JSON.stringify(usuarios));
+
+    // Mostrar mensaje de éxito y redirigir a login.html
+    const toast = document.getElementById('successToast');
+    toast.style.display = 'flex';
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 1500);
+  });
 </script>
 </body>
 </html>
