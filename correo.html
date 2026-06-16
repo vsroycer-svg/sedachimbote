@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEDACHIMBOTE - Correo</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+        body { display:flex; background:#eef2f5; }
+
+        .sidebar {
+            width:260px;
+            height:100vh;
+            background:#0b84d8;
+            color:white;
+            position:fixed;
+            overflow-y:auto;
+        }
+        .logo { text-align:center; padding:30px 20px; }
+        .logo h2 { margin-top:10px; }
+        .menu { margin-top:20px; }
+        .menu a {
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:18px 25px;
+            transition:.3s;
+        }
+        .menu a:hover, .menu a.active { background:#0a6db1; }
+        .menu a.active { border-left:4px solid white; }
+
+        .main {
+            margin-left:260px;
+            width:100%;
+            padding:30px;
+        }
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+        .header h1 { font-size:2rem; color:#0f172a; }
+
+        /* Estilos de correo */
+        .mail-container {
+            display:flex;
+            gap:20px;
+            background:white;
+            border-radius:16px;
+            box-shadow:0 2px 8px rgba(0,0,0,.08);
+            overflow:hidden;
+            min-height:600px;
+        }
+        .mail-sidebar {
+            width:220px;
+            background:#f8fafc;
+            padding:20px;
+            border-right:1px solid #e2e8f0;
+            flex-shrink:0;
+        }
+        .mail-sidebar .compose-btn {
+            width:100%;
+            background:#0b84d8;
+            color:white;
+            border:none;
+            padding:12px;
+            border-radius:40px;
+            font-weight:bold;
+            cursor:pointer;
+            margin-bottom:20px;
+            transition:.3s;
+        }
+        .mail-sidebar .compose-btn:hover { background:#0a6db1; }
+        .mail-sidebar .folder {
+            display:block;
+            padding:10px 15px;
+            border-radius:10px;
+            color:#1e293b;
+            text-decoration:none;
+            font-weight:500;
+            margin-bottom:4px;
+            transition:.2s;
+            cursor:pointer;
+        }
+        .mail-sidebar .folder:hover { background:#e2e8f0; }
+        .mail-sidebar .folder.active { background:#dbeafe; color:#0b84d8; }
+        .mail-sidebar .folder .badge {
+            float:right;
+            background:#e2e8f0;
+            padding:2px 10px;
+            border-radius:20px;
+            font-size:0.8rem;
+        }
+
+        .mail-list {
+            flex:1;
+            padding:20px;
+            overflow-y:auto;
+            max-height:700px;
+        }
+        .mail-item {
+            display:flex;
+            align-items:center;
+            padding:12px 15px;
+            border-bottom:1px solid #e2e8f0;
+            cursor:pointer;
+            transition:.2s;
+            gap:15px;
+        }
+        .mail-item:hover { background:#f1f5f9; }
+        .mail-item .avatar {
+            width:40px;
+            height:40px;
+            border-radius:50%;
+            background:#0b84d8;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:bold;
+            flex-shrink:0;
+        }
+        .mail-item .info {
+            flex:1;
+            min-width:0;
+        }
+        .mail-item .info .remitente { font-weight:700; color:#0f172a; }
+        .mail-item .info .asunto { color:#1e293b; }
+        .mail-item .info .fecha { font-size:0.8rem; color:#64748b; }
+        .mail-item .info .preview {
+            font-size:0.9rem;
+            color:#64748b;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .mail-item .leido { opacity:0.7; }
+        .mail-item .no-leido { font-weight:bold; }
+
+        /* Modal de redacción */
+        .modal-compose {
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.4);
+            z-index:1000;
+            justify-content:center;
+            align-items:center;
+        }
+        .modal-compose.activo { display:flex; }
+        .compose-card {
+            background:white;
+            max-width:600px;
+            width:90%;
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.3);
+        }
+        .compose-card h2 { color:#0b84d8; margin-bottom:20px; }
+        .compose-card input, .compose-card textarea {
+            width:100%;
+            padding:10px 14px;
+            border:1px solid #cbd5e1;
+            border-radius:10px;
+            margin-bottom:15px;
+            font-size:1rem;
+        }
+        .compose-card textarea { min-height:150px; resize:vertical; }
+        .compose-card .acciones {
+            display:flex;
+            gap:10px;
+            justify-content:flex-end;
+        }
+        .btn {
+            background:#0b84d8;
+            color:white;
+            border:none;
+            padding:10px 25px;
+            border-radius:40px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+        .btn:hover { background:#0a6db1; transform:translateY(-2px); }
+        .btn-cancelar { background:#e2e8f0; color:#1e293b; }
+        .btn-cancelar:hover { background:#cbd5e1; }
+
+        /* Modal de visualización */
+        .modal-view {
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.4);
+            z-index:1000;
+            justify-content:center;
+            align-items:center;
+        }
+        .modal-view.activo { display:flex; }
+        .view-card {
+            background:white;
+            max-width:700px;
+            width:90%;
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.3);
+            max-height:80vh;
+            overflow-y:auto;
+        }
+        .view-card .cerrar {
+            float:right;
+            font-size:1.8rem;
+            cursor:pointer;
+            color:#888;
+        }
+        .view-card .cerrar:hover { color:#333; }
+        .view-card .view-header { margin-bottom:20px; }
+        .view-card .view-header .remitente { font-weight:700; font-size:1.1rem; }
+        .view-card .view-header .fecha { color:#64748b; font-size:0.9rem; }
+        .view-card .view-body {
+            border-top:1px solid #e2e8f0;
+            padding-top:20px;
+            white-space:pre-wrap;
+            line-height:1.6;
+        }
+
+        .toast {
+            position:fixed;
+            bottom:30px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#059669;
+            color:white;
+            padding:12px 28px;
+            border-radius:60px;
+            font-weight:600;
+            display:none;
+            z-index:999;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width:768px) {
+            .sidebar { width:200px; }
+            .main { margin-left:200px; padding:20px; }
+            .mail-container { flex-direction:column; }
+            .mail-sidebar { width:100%; border-right:none; border-bottom:1px solid #e2e8f0; }
+        }
+        @media (max-width:500px) {
+            .sidebar { width:100%; height:auto; position:relative; }
+            .main { margin-left:0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <h2>SEDACHIMBOTE</h2>
+        <p>Administrador</p>
+    </div>
+    <div class="menu">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="crm.html">👥 CRM Clientes</a>
+        <a href="erp.html">📦 ERP Gestión</a>
+        <a href="facturacion.html">💧 Facturación y Cobranza</a>
+        <a href="mantenimiento.html">🔧 Mantenimiento</a>
+        <a href="reportes.html">📊 Reportes</a>
+        <a href="configuracion.html">⚙️ Configuración</a>
+        <a href="correo.html" class="active">✉️ Correo</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>✉️ Correo Interno</h1>
+        <span style="color:#64748b;">Usuario: <strong id="userNameDisplay">Admin</strong></span>
+    </div>
+
+    <div class="mail-container">
+        <!-- Sidebar de carpetas -->
+        <div class="mail-sidebar">
+            <button class="compose-btn" onclick="abrirCompose()">✏️ Redactar</button>
+            <div class="folder active" data-folder="inbox" onclick="cambiarCarpeta('inbox')">
+                📥 Bandeja de entrada <span class="badge" id="inboxCount">0</span>
+            </div>
+            <div class="folder" data-folder="sent" onclick="cambiarCarpeta('sent')">
+                📤 Enviados <span class="badge" id="sentCount">0</span>
+            </div>
+            <div class="folder" data-folder="drafts" onclick="cambiarCarpeta('drafts')">
+                📝 Borradores <span class="badge" id="draftsCount">0</span>
+            </div>
+        </div>
+
+        <!-- Lista de correos -->
+        <div class="mail-list" id="mailList">
+            <!-- Se llena con JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal para redactar -->
+<div class="modal-compose" id="modalCompose">
+    <div class="compose-card">
+        <h2>📝 Nuevo Mensaje</h2>
+        <form id="formCompose">
+            <input type="text" id="composeTo" placeholder="Destinatario (ej: juan@sedachimbote.com)" required>
+            <input type="text" id="composeSubject" placeholder="Asunto" required>
+            <textarea id="composeBody" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            <div class="acciones">
+                <button type="button" class="btn btn-cancelar" onclick="cerrarCompose()">Cancelar</button>
+                <button type="submit" class="btn">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal para ver correo -->
+<div class="modal-view" id="modalView">
+    <div class="view-card">
+        <span class="cerrar" onclick="cerrarView()">✕</span>
+        <div id="viewContent">
+            <!-- Se llena con JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">✅ Operación exitosa</div>
+
+<script>
+    // ---------- GESTIÓN DE CORREOS ----------
+    function getCorreos() {
+        return JSON.parse(localStorage.getItem('correos_sedachimbote')) || [];
+    }
+
+    function guardarCorreos(correos) {
+        localStorage.setItem('correos_sedachimbote', JSON.stringify(correos));
+    }
+
+    // Correos de ejemplo (se ejecuta solo si no hay datos)
+    function inicializarCorreos() {
+        if (localStorage.getItem('correos_sedachimbote')) return;
+        const ejemplos = [
+            { id: 1, remitente: 'soporte@sedachimbote.com', destinatario: 'admin@sedachimbote.com', asunto: 'Bienvenido al sistema', cuerpo: 'Hola, te damos la bienvenida al sistema de correo interno de Sedachimbote.', fecha: '2026-06-15T10:00:00', leido: false, carpeta: 'inbox' },
+            { id: 2, remitente: 'facturacion@sedachimbote.com', destinatario: 'admin@sedachimbote.com', asunto: 'Boletas pendientes de pago', cuerpo: 'Hay 3 boletas con vencimiento próximo. Por favor revisa el módulo de facturación.', fecha: '2026-06-14T14:30:00', leido: false, carpeta: 'inbox' },
+            { id: 3, remitente: 'admin@sedachimbote.com', destinatario: 'tecnicos@sedachimbote.com', asunto: 'Reunión de mantenimiento', cuerpo: 'Se convoca a reunión de mantenimiento para el día 20 de junio a las 9am.', fecha: '2026-06-13T09:00:00', leido: false, carpeta: 'sent' },
+        ];
+        guardarCorreos(ejemplos);
+    }
+
+    // ---------- OBTENER CARPETA ACTUAL ----------
+    let carpetaActual = 'inbox';
+
+    // ---------- RENDERIZAR LISTA ----------
+    function renderizarLista() {
+        const correos = getCorreos();
+        const filtrados = correos.filter(c => c.carpeta === carpetaActual);
+        const contenedor = document.getElementById('mailList');
+        contenedor.innerHTML = '';
+
+        if (filtrados.length === 0) {
+            contenedor.innerHTML = '<p style="text-align:center; color:#888; padding:40px;">No hay mensajes en esta carpeta</p>';
+        } else {
+            // Ordenar por fecha (más reciente primero)
+            filtrados.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            filtrados.forEach(c => {
+                const item = document.createElement('div');
+                item.className = 'mail-item' + (c.leido ? ' leido' : ' no-leido');
+                const avatar = c.remitente.charAt(0).toUpperCase();
+                const fechaFormateada = new Date(c.fecha).toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+                item.innerHTML = `
+                    <div class="avatar">${avatar}</div>
+                    <div class="info">
+                        <div class="remitente">${c.remitente}</div>
+                        <div class="asunto">${c.asunto}</div>
+                        <div class="preview">${c.cuerpo.substring(0, 60)}${c.cuerpo.length > 60 ? '...' : ''}</div>
+                    </div>
+                    <div class="fecha">${fechaFormateada}</div>
+                `;
+                item.addEventListener('click', () => abrirCorreo(c.id));
+                contenedor.appendChild(item);
+            });
+        }
+
+        // Actualizar contadores
+        const inboxCount = correos.filter(c => c.carpeta === 'inbox').length;
+        const sentCount = correos.filter(c => c.carpeta === 'sent').length;
+        const draftsCount = correos.filter(c => c.carpeta === 'drafts').length;
+        document.getElementById('inboxCount').textContent = inboxCount;
+        document.getElementById('sentCount').textContent = sentCount;
+        document.getElementById('draftsCount').textContent = draftsCount;
+    }
+
+    // ---------- CAMBIAR CARPETA ----------
+    function cambiarCarpeta(carpeta) {
+        carpetaActual = carpeta;
+        document.querySelectorAll('.folder').forEach(el => el.classList.remove('active'));
+        document.querySelector(`.folder[data-folder="${carpeta}"]`).classList.add('active');
+        renderizarLista();
+    }
+
+    // ---------- ABRIR CORREO (marcar como leído) ----------
+    function abrirCorreo(id) {
+        const correos = getCorreos();
+        const correo = correos.find(c => c.id === id);
+        if (!correo) return;
+        // Marcar como leído
+        correo.leido = true;
+        guardarCorreos(correos);
+        renderizarLista();
+
+        // Mostrar modal
+        const modal = document.getElementById('modalView');
+        const content = document.getElementById('viewContent');
+        const fecha = new Date(correo.fecha).toLocaleString('es-ES', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+        content.innerHTML = `
+            <div class="view-header">
+                <div class="remitente">De: ${correo.remitente}</div>
+                <div class="fecha">${fecha}</div>
+                <div style="font-weight:bold; margin-top:5px;">${correo.asunto}</div>
+            </div>
+            <div class="view-body">${correo.cuerpo}</div>
+        `;
+        modal.classList.add('activo');
+    }
+
+    function cerrarView() {
+        document.getElementById('modalView').classList.remove('activo');
+    }
+
+    // ---------- REDACTAR CORREO ----------
+    function abrirCompose() {
+        document.getElementById('modalCompose').classList.add('activo');
+        document.getElementById('composeTo').focus();
+    }
+
+    function cerrarCompose() {
+        document.getElementById('modalCompose').classList.remove('activo');
+        document.getElementById('formCompose').reset();
+    }
+
+    document.getElementById('formCompose').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const destinatario = document.getElementById('composeTo').value.trim();
+        const asunto = document.getElementById('composeSubject').value.trim();
+        const cuerpo = document.getElementById('composeBody').value.trim();
+
+        if (!destinatario || !asunto || !cuerpo) {
+            mostrarToast('Completa todos los campos');
+            return;
+        }
+
+        const correos = getCorreos();
+        const nuevo = {
+            id: Date.now(),
+            remitente: 'admin@sedachimbote.com',
+            destinatario: destinatario,
+            asunto: asunto,
+            cuerpo: cuerpo,
+            fecha: new Date().toISOString(),
+            leido: false,
+            carpeta: 'sent'
+        };
+        correos.push(nuevo);
+        guardarCorreos(correos);
+        cerrarCompose();
+        // Si la carpeta actual es 'sent', refrescar
+        if (carpetaActual === 'sent') renderizarLista();
+        else if (carpetaActual === 'inbox') renderizarLista(); // por si se añade a inbox
+        mostrarToast('Mensaje enviado correctamente');
+    });
+
+    // ---------- TOAST ----------
+    function mostrarToast(mensaje) {
+        const toast = document.getElementById('toast');
+        toast.textContent = '✅ ' + mensaje;
+        toast.style.display = 'block';
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+
+    // ---------- CARGAR NOMBRE DE USUARIO ----------
+    function cargarUsuario() {
+        const perfil = JSON.parse(localStorage.getItem('config_perfil')) || {};
+        document.getElementById('userNameDisplay').textContent = perfil.nombre || 'Admin';
+    }
+
+    // ---------- INICIALIZAR ----------
+    document.addEventListener('DOMContentLoaded', () => {
+        inicializarCorreos();
+        cargarUsuario();
+        renderizarLista();
+    });
+
+    // Cerrar modales con ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            cerrarView();
+            cerrarCompose();
+        }
+    });
+</script>
+</body>
+</html>
