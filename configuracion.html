@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEDACHIMBOTE - Configuración</title>
+    <style>
+        /* Reset y base */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+        body { display:flex; background:#eef2f5; }
+
+        /* Sidebar (mismo estilo que dashboard) */
+        .sidebar {
+            width:260px;
+            height:100vh;
+            background:#0b84d8;
+            color:white;
+            position:fixed;
+            overflow-y:auto;
+        }
+        .logo { text-align:center; padding:30px 20px; }
+        .logo h2 { margin-top:10px; }
+        .menu { margin-top:20px; }
+        .menu a {
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:18px 25px;
+            transition:.3s;
+        }
+        .menu a:hover { background:#0a6db1; }
+        .menu a.active { background:#0a6db1; border-left:4px solid white; }
+
+        /* Contenido principal */
+        .main {
+            margin-left:260px;
+            width:100%;
+            padding:30px;
+        }
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+        .header h1 { font-size:2rem; color:#0f172a; }
+
+        /* Tarjetas de configuración */
+        .config-section {
+            background:white;
+            border-radius:16px;
+            padding:25px 30px;
+            margin-bottom:30px;
+            box-shadow:0 2px 8px rgba(0,0,0,.08);
+        }
+        .config-section h2 {
+            color:#0b84d8;
+            font-size:1.5rem;
+            margin-bottom:1rem;
+            border-bottom:2px solid #e2e8f0;
+            padding-bottom:0.8rem;
+        }
+        .config-section label {
+            display:block;
+            font-weight:600;
+            margin-top:1rem;
+            margin-bottom:0.3rem;
+            color:#1e293b;
+        }
+        .config-section input, .config-section select {
+            width:100%;
+            max-width:400px;
+            padding:10px 14px;
+            border:1px solid #cbd5e1;
+            border-radius:10px;
+            font-size:1rem;
+            transition:0.2s;
+        }
+        .config-section input:focus, .config-section select:focus {
+            outline:none;
+            border-color:#0b84d8;
+            box-shadow:0 0 0 3px rgba(11,132,216,0.2);
+        }
+        .config-section .row {
+            display:flex;
+            flex-wrap:wrap;
+            gap:30px;
+            margin-top:0.5rem;
+        }
+        .config-section .row > div { flex:1; min-width:200px; }
+        .btn-guardar {
+            background:#0b84d8;
+            color:white;
+            border:none;
+            padding:10px 28px;
+            border-radius:40px;
+            font-weight:700;
+            cursor:pointer;
+            transition:.3s;
+            margin-top:1.5rem;
+        }
+        .btn-guardar:hover { background:#0a6db1; transform:translateY(-2px); }
+
+        /* Checkbox personalizado para notificaciones */
+        .toggle-group {
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            margin-top:0.8rem;
+        }
+        .toggle-item {
+            display:flex;
+            align-items:center;
+            gap:10px;
+            background:#f1f5f9;
+            padding:8px 18px 8px 14px;
+            border-radius:40px;
+            cursor:pointer;
+        }
+        .toggle-item input[type="checkbox"] {
+            width:18px;
+            height:18px;
+            accent-color:#0b84d8;
+            cursor:pointer;
+        }
+
+        /* Mensaje de éxito */
+        .toast {
+            position:fixed;
+            bottom:30px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#059669;
+            color:white;
+            padding:12px 28px;
+            border-radius:60px;
+            font-weight:600;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+            display:none;
+            z-index:999;
+        }
+
+        /* Responsive */
+        @media (max-width:768px) {
+            .sidebar { width:200px; }
+            .main { margin-left:200px; padding:20px; }
+            .config-section .row { flex-direction:column; gap:10px; }
+            .header { flex-direction:column; align-items:flex-start; gap:10px; }
+        }
+        @media (max-width:500px) {
+            .sidebar { width:100%; height:auto; position:relative; }
+            .main { margin-left:0; }
+            .menu a { padding:12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <h2>SEDACHIMBOTE</h2>
+        <p>Administrador</p>
+    </div>
+    <div class="menu">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="crm.html">👥 CRM Clientes</a>
+        <a href="erp.html">📦 ERP Gestión</a>
+        <a href="facturacion.html">💧 Facturación y Cobranza</a>
+        <a href="#">🚰 Gestión de Redes</a>
+        <a href="mantenimiento.html">🔧 Mantenimiento</a>
+		<a href="reportes.html">📊 Reportes</a>
+        <a href="configuracion.html" class="active">⚙️ Configuración</a>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+    <div class="header">
+        <h1>⚙️ Configuración</h1>
+        <span style="color:#64748b;">Usuario: <strong id="userNameDisplay">Admin</strong></span>
+    </div>
+
+    <!-- SECCIÓN PERFIL -->
+    <section class="config-section" id="seccion-perfil">
+        <h2>👤 Mi Perfil</h2>
+        <div class="row">
+            <div>
+                <label>Nombre completo</label>
+                <input type="text" id="profileName" placeholder="Tu nombre">
+            </div>
+            <div>
+                <label>Correo electrónico</label>
+                <input type="email" id="profileEmail" placeholder="tu@email.com">
+            </div>
+            <div>
+                <label>Teléfono</label>
+                <input type="tel" id="profilePhone" placeholder="+51 999 888 777">
+            </div>
+        </div>
+        <button class="btn-guardar" onclick="guardarPerfil()">Guardar Perfil</button>
+    </section>
+	<!-- Scolor -->
+<div class="row">
+    <div>
+        <label>Color principal (tema)</label>
+        <input type="color" id="colorPrincipal" value="#0b84d8">
+        <small style="display:block; margin-top:4px;">Cambia el color de toda la interfaz</small>
+    </div>
+</div>
+    <!-- SECCIÓN SEGURIDAD -->
+    <section class="config-section" id="seccion-seguridad">
+        <h2>🔒 Seguridad</h2>
+        <div class="row">
+            <div>
+                <label>Contraseña actual</label>
+                <input type="password" id="currentPassword" placeholder="••••••••">
+            </div>
+            <div>
+                <label>Nueva contraseña</label>
+                <input type="password" id="newPassword" placeholder="Mínimo 6 caracteres">
+            </div>
+            <div>
+                <label>Confirmar nueva contraseña</label>
+                <input type="password" id="confirmPassword" placeholder="Repite la contraseña">
+            </div>
+        </div>
+        <button class="btn-guardar" onclick="cambiarContraseña()">Cambiar Contraseña</button>
+        <p id="passwordFeedback" style="margin-top:0.5rem;font-weight:500;"></p>
+    </section>
+
+    <!-- SECCIÓN PREFERENCIAS -->
+    <section class="config-section" id="seccion-preferencias">
+        <h2>🎨 Preferencias</h2>
+        <div class="row">
+            <div>
+                <label>Idioma</label>
+                <select id="prefLanguage">
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                </select>
+            </div>
+            <div>
+                <label>Zona horaria</label>
+                <select id="prefTimezone">
+                    <option value="America/Lima">Lima (GMT-5)</option>
+                    <option value="America/Mexico_City">Ciudad de México</option>
+                    <option value="America/Bogota">Bogotá</option>
+                    <option value="America/Santiago">Santiago</option>
+                </select>
+            </div>
+            <div>
+                <label>Formato de fecha</label>
+                <select id="prefDateFormat">
+                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-guardar" onclick="guardarPreferencias()">Guardar Preferencias</button>
+    </section>
+
+    <!-- SECCIÓN NOTIFICACIONES -->
+    <section class="config-section" id="seccion-notificaciones">
+        <h2>🔔 Notificaciones</h2>
+        <div class="toggle-group">
+            <label class="toggle-item">
+                <input type="checkbox" id="notifEmail"> Correo electrónico
+            </label>
+            <label class="toggle-item">
+                <input type="checkbox" id="notifSMS"> SMS
+            </label>
+            <label class="toggle-item">
+                <input type="checkbox" id="notifPush"> Notificaciones push
+            </label>
+            <label class="toggle-item">
+                <input type="checkbox" id="notifWhatsApp"> WhatsApp
+            </label>
+        </div>
+        <button class="btn-guardar" onclick="guardarNotificaciones()">Guardar Notificaciones</button>
+    </section>
+</div>
+
+<!-- TOAST (mensaje flotante) -->
+<div id="toast" class="toast">✅ Cambios guardados correctamente</div>
+
+<script>
+    // ---------- CARGAR DATOS GUARDADOS ----------
+    function cargarConfiguracion() {
+        // Perfil
+        const perfil = JSON.parse(localStorage.getItem('config_perfil')) || {};
+        document.getElementById('profileName').value = perfil.nombre || '';
+        document.getElementById('profileEmail').value = perfil.email || '';
+        document.getElementById('profilePhone').value = perfil.telefono || '';
+
+        // Mostrar nombre en el header
+        if (perfil.nombre) {
+            document.getElementById('userNameDisplay').textContent = perfil.nombre;
+        }
+
+        // Preferencias
+        const pref = JSON.parse(localStorage.getItem('config_preferencias')) || {};
+        document.getElementById('prefLanguage').value = pref.idioma || 'es';
+        document.getElementById('prefTimezone').value = pref.zonaHoraria || 'America/Lima';
+        document.getElementById('prefDateFormat').value = pref.formatoFecha || 'DD/MM/YYYY';
+
+        // Notificaciones
+        const notif = JSON.parse(localStorage.getItem('config_notificaciones')) || {};
+        document.getElementById('notifEmail').checked = notif.email || false;
+        document.getElementById('notifSMS').checked = notif.sms || false;
+        document.getElementById('notifPush').checked = notif.push || false;
+        document.getElementById('notifWhatsApp').checked = notif.whatsapp || false;
+    }
+
+    // ---------- GUARDAR PERFIL ----------
+    function guardarPerfil() {
+        const perfil = {
+            nombre: document.getElementById('profileName').value.trim(),
+            email: document.getElementById('profileEmail').value.trim(),
+            telefono: document.getElementById('profilePhone').value.trim()
+        };
+        localStorage.setItem('config_perfil', JSON.stringify(perfil));
+        // Actualizar nombre en el header
+        if (perfil.nombre) {
+            document.getElementById('userNameDisplay').textContent = perfil.nombre;
+        }
+        mostrarToast('Perfil actualizado correctamente');
+    }
+
+    // ---------- CAMBIAR CONTRASEÑA (simulado) ----------
+    function cambiarContraseña() {
+        const actual = document.getElementById('currentPassword').value;
+        const nueva = document.getElementById('newPassword').value;
+        const confirmar = document.getElementById('confirmPassword').value;
+        const feedback = document.getElementById('passwordFeedback');
+
+        // Simular que la contraseña actual es "admin123" (solo para demo)
+        const passwordCorrecta = 'admin123';
+        if (actual !== passwordCorrecta) {
+            feedback.style.color = '#dc2626';
+            feedback.textContent = '❌ Contraseña actual incorrecta.';
+            return;
+        }
+        if (nueva.length < 6) {
+            feedback.style.color = '#dc2626';
+            feedback.textContent = '❌ La nueva contraseña debe tener al menos 6 caracteres.';
+            return;
+        }
+        if (nueva !== confirmar) {
+            feedback.style.color = '#dc2626';
+            feedback.textContent = '❌ Las contraseñas no coinciden.';
+            return;
+        }
+
+        // En un entorno real aquí se enviaría al servidor.
+        // Simulamos guardado en localStorage (solo para demostración)
+        localStorage.setItem('config_password', nueva);
+        feedback.style.color = '#059669';
+        feedback.textContent = '✅ Contraseña cambiada exitosamente.';
+        // Limpiar campos
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+        mostrarToast('Contraseña actualizada');
+    }
+
+    // ---------- GUARDAR PREFERENCIAS ----------
+    function guardarPreferencias() {
+        const pref = {
+            idioma: document.getElementById('prefLanguage').value,
+            zonaHoraria: document.getElementById('prefTimezone').value,
+            formatoFecha: document.getElementById('prefDateFormat').value
+        };
+        localStorage.setItem('config_preferencias', JSON.stringify(pref));
+        mostrarToast('Preferencias guardadas');
+    }
+
+    // ---------- GUARDAR NOTIFICACIONES ----------
+    function guardarNotificaciones() {
+        const notif = {
+            email: document.getElementById('notifEmail').checked,
+            sms: document.getElementById('notifSMS').checked,
+            push: document.getElementById('notifPush').checked,
+            whatsapp: document.getElementById('notifWhatsApp').checked
+        };
+        localStorage.setItem('config_notificaciones', JSON.stringify(notif));
+        mostrarToast('Preferencias de notificaciones guardadas');
+    }
+
+    // ---------- TOAST ----------
+    function mostrarToast(mensaje) {
+        const toast = document.getElementById('toast');
+        toast.textContent = '✅ ' + mensaje;
+        toast.style.display = 'block';
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
+
+    // ---------- EJECUTAR AL CARGAR ----------
+    document.addEventListener('DOMContentLoaded', cargarConfiguracion);
+</script>
+</body>
+</html>

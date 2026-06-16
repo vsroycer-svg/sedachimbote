@@ -151,11 +151,11 @@ ul{
         <a href="crm.html">馃懃 CRM Clientes</a>
         <a href="erp.html">馃摝 ERP Gesti贸n</a>
 
-        <a href="#">馃挧 Facturaci贸n y Cobranza</a>
+        <a href="facturacion.html">?? Facturación y Cobranza</a>
         <a href="#">馃毎 Gesti贸n de Redes</a>
-        <a href="#">馃敡 Mantenimiento</a>
-        <a href="#">馃搳 Reportes</a>
-        <a href="#">鈿欙笍 Configuraci贸n</a>
+        <a href="mantenimiento.html">?? Mantenimiento</a>
+		<a href="reportes.html">?? Reportes</a>
+       <a href="configuracion.html">?? Configuración</a>
     </div>
 
 </div>
@@ -203,7 +203,14 @@ ul{
             <div class="bar" style="height:280px;"></div>
         </div>
     </div>
-
+<script>
+    (function() {
+        const color = localStorage.getItem('tema_color') || '#0b84d8';
+        document.documentElement.style.setProperty('--primary', color);
+        // Opcional: también cambiar el color del sidebar o botones si usas variables CSS.
+        // Si tu CSS usa --primary en todas partes, ya se actualizará.
+    })();
+</script>
     <div class="info">
 
         <div class="box">

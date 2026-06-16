@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEDACHIMBOTE - Mantenimiento</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+        body { display:flex; background:#eef2f5; }
+
+        .sidebar {
+            width:260px;
+            height:100vh;
+            background:#0b84d8;
+            color:white;
+            position:fixed;
+            overflow-y:auto;
+        }
+        .logo { text-align:center; padding:30px 20px; }
+        .logo h2 { margin-top:10px; }
+        .menu { margin-top:20px; }
+        .menu a {
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:18px 25px;
+            transition:.3s;
+        }
+        .menu a:hover, .menu a.active { background:#0a6db1; }
+        .menu a.active { border-left:4px solid white; }
+
+        .main {
+            margin-left:260px;
+            width:100%;
+            padding:30px;
+        }
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+        .header h1 { font-size:2rem; color:#0f172a; }
+
+        .cards {
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:20px;
+            margin-bottom:30px;
+        }
+        .card {
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        }
+        .card h3 { color:#555; margin-bottom:10px; }
+        .card p { font-size:32px; color:#0b84d8; font-weight:bold; }
+
+        .table-container {
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+            margin-bottom:30px;
+            overflow-x:auto;
+        }
+        table { width:100%; border-collapse:collapse; }
+        th {
+            background:#0b84d8;
+            color:white;
+            padding:12px;
+            text-align:left;
+        }
+        td { padding:12px; border-bottom:1px solid #ddd; }
+        .estado-programado { color:#ff9800; font-weight:bold; }
+        .estado-encurso { color:#0b84d8; font-weight:bold; }
+        .estado-completado { color:#4caf50; font-weight:bold; }
+
+        .form-mantenimiento {
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        }
+        .form-mantenimiento h2 { margin-bottom:15px; color:#0b84d8; }
+        .form-row {
+            display:flex;
+            flex-wrap:wrap;
+            gap:15px;
+            align-items:flex-end;
+        }
+        .form-row .field {
+            flex:1;
+            min-width:180px;
+        }
+        .form-row label { display:block; font-weight:600; margin-bottom:4px; }
+        .form-row input, .form-row select {
+            width:100%;
+            padding:10px;
+            border:1px solid #cbd5e1;
+            border-radius:8px;
+        }
+        .btn {
+            background:#0b84d8;
+            color:white;
+            border:none;
+            padding:10px 25px;
+            border-radius:40px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+        .btn:hover { background:#0a6db1; transform:translateY(-2px); }
+        .btn-eliminar {
+            background:#dc2626;
+            color:white;
+            border:none;
+            padding:5px 12px;
+            border-radius:20px;
+            cursor:pointer;
+        }
+        .btn-eliminar:hover { background:#b91c1c; }
+
+        .toast {
+            position:fixed;
+            bottom:30px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#059669;
+            color:white;
+            padding:12px 28px;
+            border-radius:60px;
+            font-weight:600;
+            display:none;
+            z-index:999;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width:768px) {
+            .sidebar { width:200px; }
+            .main { margin-left:200px; padding:20px; }
+            .cards { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:500px) {
+            .sidebar { width:100%; height:auto; position:relative; }
+            .main { margin-left:0; }
+            .cards { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <h2>SEDACHIMBOTE</h2>
+        <p>Administrador</p>
+    </div>
+    <div class="menu">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="crm.html">👥 CRM Clientes</a>
+        <a href="erp.html">📦 ERP Gestión</a>
+        <a href="facturacion.html">💧 Facturación y Cobranza</a>
+        <a href="#">🚰 Gestión de Redes</a>
+        <a href="mantenimiento.html" class="active">🔧 Mantenimiento</a>
+        <a href="reportes.html">📊 Reportes</a>
+        <a href="configuracion.html">⚙️ Configuración</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>🔧 Mantenimiento</h1>
+        <span style="color:#64748b;">Usuario: <strong id="userNameDisplay">Admin</strong></span>
+    </div>
+
+    <!-- Tarjetas de resumen -->
+    <div class="cards">
+        <div class="card"><h3>Órdenes Activas</h3><p id="totalActivas">0</p></div>
+        <div class="card"><h3>Completadas</h3><p id="totalCompletadas">0</p></div>
+        <div class="card"><h3>Programadas</h3><p id="totalProgramadas">0</p></div>
+        <div class="card"><h3>Total</h3><p id="totalOrdenes">0</p></div>
+    </div>
+
+    <!-- Tabla de órdenes -->
+    <div class="table-container">
+        <h2 style="margin-bottom:15px; color:#0b84d8;">📋 Órdenes de Mantenimiento</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Responsable</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tablaOrdenes">
+                <!-- Se llena con JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario para nueva orden -->
+    <div class="form-mantenimiento">
+        <h2>➕ Nueva Orden de Mantenimiento</h2>
+        <form id="formOrden">
+            <div class="form-row">
+                <div class="field">
+                    <label>Fecha</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="field">
+                    <label>Descripción</label>
+                    <input type="text" id="descripcion" placeholder="Ej: Reparación de tubería" required>
+                </div>
+                <div class="field">
+                    <label>Responsable</label>
+                    <input type="text" id="responsable" placeholder="Nombre del técnico" required>
+                </div>
+                <div class="field">
+                    <label>Estado</label>
+                    <select id="estado">
+                        <option value="Programado">Programado</option>
+                        <option value="En curso">En curso</option>
+                        <option value="Completado">Completado</option>
+                    </select>
+                </div>
+                <div class="field" style="flex:0 0 auto;">
+                    <button type="submit" class="btn">Agregar Orden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">✅ Operación exitosa</div>
+
+<script>
+    // ---------- CARGAR Y GUARDAR DATOS ----------
+    function getOrdenes() {
+        return JSON.parse(localStorage.getItem('mantenimiento_ordenes')) || [];
+    }
+
+    function guardarOrdenes(ordenes) {
+        localStorage.setItem('mantenimiento_ordenes', JSON.stringify(ordenes));
+    }
+
+    // ---------- PINTAR TABLA ----------
+    function renderizarTabla() {
+        const ordenes = getOrdenes();
+        const tbody = document.getElementById('tablaOrdenes');
+        tbody.innerHTML = '';
+
+        if (ordenes.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#888;">No hay órdenes registradas</td></tr>';
+        } else {
+            ordenes.forEach((ord, index) => {
+                const estadoClass = 
+                    ord.estado === 'Programado' ? 'estado-programado' :
+                    ord.estado === 'En curso' ? 'estado-encurso' :
+                    'estado-completado';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>#${index + 1}</td>
+                    <td>${ord.fecha}</td>
+                    <td>${ord.descripcion}</td>
+                    <td>${ord.responsable}</td>
+                    <td class="${estadoClass}">${ord.estado}</td>
+                    <td><button class="btn-eliminar" onclick="eliminarOrden(${index})">Eliminar</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Actualizar tarjetas
+        const activas = ordenes.filter(o => o.estado === 'En curso').length;
+        const completadas = ordenes.filter(o => o.estado === 'Completado').length;
+        const programadas = ordenes.filter(o => o.estado === 'Programado').length;
+        document.getElementById('totalActivas').textContent = activas;
+        document.getElementById('totalCompletadas').textContent = completadas;
+        document.getElementById('totalProgramadas').textContent = programadas;
+        document.getElementById('totalOrdenes').textContent = ordenes.length;
+    }
+
+    // ---------- AGREGAR ORDEN ----------
+    document.getElementById('formOrden').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const fecha = document.getElementById('fecha').value;
+        const descripcion = document.getElementById('descripcion').value.trim();
+        const responsable = document.getElementById('responsable').value.trim();
+        const estado = document.getElementById('estado').value;
+
+        if (!fecha || !descripcion || !responsable) {
+            mostrarToast('Completa todos los campos');
+            return;
+        }
+
+        const ordenes = getOrdenes();
+        ordenes.push({ fecha, descripcion, responsable, estado });
+        guardarOrdenes(ordenes);
+        renderizarTabla();
+        this.reset();
+        mostrarToast('Orden agregada correctamente');
+    });
+
+    // ---------- ELIMINAR ORDEN ----------
+    function eliminarOrden(index) {
+        if (!confirm('¿Eliminar esta orden?')) return;
+        const ordenes = getOrdenes();
+        ordenes.splice(index, 1);
+        guardarOrdenes(ordenes);
+        renderizarTabla();
+        mostrarToast('Orden eliminada');
+    }
+
+    // ---------- TOAST ----------
+    function mostrarToast(mensaje) {
+        const toast = document.getElementById('toast');
+        toast.textContent = '✅ ' + mensaje;
+        toast.style.display = 'block';
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+
+    // ---------- CARGAR NOMBRE DE USUARIO ----------
+    function cargarUsuario() {
+        const perfil = JSON.parse(localStorage.getItem('config_perfil')) || {};
+        document.getElementById('userNameDisplay').textContent = perfil.nombre || 'Admin';
+    }
+
+    // ---------- INICIALIZAR ----------
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarUsuario();
+        renderizarTabla();
+    });
+</script>
+</body>
+</html>

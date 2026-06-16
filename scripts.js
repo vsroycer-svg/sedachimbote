@@ -65,6 +65,22 @@ backToTop.addEventListener("click", ()=>{
   });
 });
 
+
+function guardarColor() {
+    const color = document.getElementById('colorPrincipal').value;
+    localStorage.setItem('tema_color', color);
+    // Aplicar inmediatamente en esta página
+    document.documentElement.style.setProperty('--primary', color);
+    mostrarToast('Color actualizado');
+}
+
+// Cargar el color guardado al iniciar
+const colorGuardado = localStorage.getItem('tema_color') || '#0b84d8';
+document.getElementById('colorPrincipal').value = colorGuardado;
+document.documentElement.style.setProperty('--primary', colorGuardado);
+
+// Agregar evento change al input
+document.getElementById('colorPrincipal').addEventListener('input', guardarColor);
 // AÑO FOOTER
 
 document.getElementById("currentYear").textContent =
@@ -134,3 +150,79 @@ filterBtns.forEach(btn=>{
   });
 
 });
+// ========== CONFIGURACIÓN GLOBAL ==========
+function aplicarConfigGlobal() {
+    // Color de fondo
+    const color = localStorage.getItem('config_color');
+    if (color) {
+        document.body.style.backgroundColor = color;
+        // También podemos cambiar el color de fondo de la sidebar si queremos
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.backgroundColor = color; // o un tono derivado
+        }
+    }
+
+    // Idioma
+    const idioma = localStorage.getItem('config_idioma') || 'es';
+    // Traducciones básicas para elementos con clase "i18n"
+    const traducciones = {
+        es: {
+            'Dashboard': 'Dashboard',
+            'CRM Clientes': 'CRM Clientes',
+            'ERP Gestión': 'ERP Gestión',
+            'Configuración': 'Configuración',
+            'Facturación y Cobranza': 'Facturación y Cobranza',
+            'Gestión de Redes': 'Gestión de Redes',
+            'Mantenimiento': 'Mantenimiento',
+            'Reportes': 'Reportes',
+            'Bienvenido': 'Bienvenido',
+            'Usuarios Activos': 'Usuarios Activos',
+            'Recibos Emitidos': 'Recibos Emitidos',
+            'Pagos del Mes': 'Pagos del Mes',
+            'Reclamos Pendientes': 'Reclamos Pendientes',
+            'Consumo de Agua - Últimos 6 Meses': 'Consumo de Agua - Últimos 6 Meses',
+            'Avisos Importantes': 'Avisos Importantes',
+            'Atención al Cliente': 'Atención al Cliente',
+        },
+        en: {
+            'Dashboard': 'Dashboard',
+            'CRM Clientes': 'CRM Clients',
+            'ERP Gestión': 'ERP Management',
+            'Configuración': 'Settings',
+            'Facturación y Cobranza': 'Billing and Collection',
+            'Gestión de Redes': 'Network Management',
+            'Mantenimiento': 'Maintenance',
+            'Reportes': 'Reports',
+            'Bienvenido': 'Welcome',
+            'Usuarios Activos': 'Active Users',
+            'Recibos Emitidos': 'Invoices Issued',
+            'Pagos del Mes': 'Monthly Payments',
+            'Reclamos Pendientes': 'Pending Claims',
+            'Consumo de Agua - Últimos 6 Meses': 'Water Consumption - Last 6 Months',
+            'Avisos Importantes': 'Important Alerts',
+            'Atención al Cliente': 'Customer Service',
+        }
+    };
+
+    // Seleccionar todos los elementos con atributo data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (traducciones[idioma] && traducciones[idioma][key]) {
+            el.textContent = traducciones[idioma][key];
+        }
+    });
+
+    // También podemos traducir el placeholder del buscador si tiene data-i18n-placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (traducciones[idioma] && traducciones[idioma][key]) {
+            el.placeholder = traducciones[idioma][key];
+        }
+    });
+}
+
+// Ejecutar al cargar la página y también cuando se guarde la configuración (opcional)
+document.addEventListener('DOMContentLoaded', aplicarConfigGlobal);
+// Si queremos aplicar cambios sin recargar, podemos llamar a esta función desde configuracion.html
+// Pero es más sencillo recargar la página.

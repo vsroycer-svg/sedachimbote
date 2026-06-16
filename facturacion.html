@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEDACHIMBOTE - Facturación y Cobranza</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+        body { display:flex; background:#eef2f5; }
+
+        .sidebar {
+            width:260px;
+            height:100vh;
+            background:var(--primary, #0b84d8);
+            color:white;
+            position:fixed;
+            overflow-y:auto;
+        }
+        .logo { text-align:center; padding:30px 20px; }
+        .logo h2 { margin-top:10px; }
+        .menu { margin-top:20px; }
+        .menu a {
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:18px 25px;
+            transition:.3s;
+        }
+        .menu a:hover, .menu a.active { background:rgba(255,255,255,0.2); }
+        .menu a.active { border-left:4px solid white; }
+
+        .main {
+            margin-left:260px;
+            width:100%;
+            padding:30px;
+        }
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+        .header h1 { font-size:2rem; color:#0f172a; }
+
+        .form-section {
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+            margin-bottom:30px;
+        }
+        .form-section h2 { color:var(--primary, #0b84d8); margin-bottom:15px; }
+        .row {
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            margin-bottom:15px;
+        }
+        .row .field {
+            flex:1;
+            min-width:200px;
+        }
+        .row .field label { display:block; font-weight:600; margin-bottom:4px; }
+        .row .field input, .row .field select {
+            width:100%;
+            padding:10px;
+            border:1px solid #cbd5e1;
+            border-radius:8px;
+        }
+        .btn {
+            background:var(--primary, #0b84d8);
+            color:white;
+            border:none;
+            padding:10px 25px;
+            border-radius:40px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+        .btn:hover { opacity:0.85; transform:translateY(-2px); }
+        .btn-secondary {
+            background:#64748b;
+        }
+        .btn-success {
+            background:#059669;
+        }
+
+        .tabla-items {
+            width:100%;
+            border-collapse:collapse;
+            margin:15px 0;
+        }
+        .tabla-items th {
+            background:var(--primary, #0b84d8);
+            color:white;
+            padding:10px;
+            text-align:left;
+        }
+        .tabla-items td {
+            padding:10px;
+            border-bottom:1px solid #ddd;
+        }
+        .tabla-items input {
+            width:100%;
+            padding:6px;
+            border:1px solid #cbd5e1;
+            border-radius:4px;
+        }
+        .tabla-items .btn-eliminar {
+            background:#dc2626;
+            color:white;
+            border:none;
+            padding:4px 10px;
+            border-radius:20px;
+            cursor:pointer;
+        }
+
+        .totales {
+            display:flex;
+            flex-direction:column;
+            align-items:flex-end;
+            margin-top:15px;
+            font-weight:bold;
+        }
+        .totales div { margin:4px 0; }
+
+        /* Estilos para la boleta impresa */
+        .boleta-container {
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+            margin-top:30px;
+            display:none;
+        }
+        .boleta-container.visible { display:block; }
+        .boleta {
+            max-width:800px;
+            margin:auto;
+            border:2px solid #333;
+            padding:30px;
+            background:#fff;
+        }
+        .boleta-header {
+            display:flex;
+            justify-content:space-between;
+            border-bottom:2px solid #333;
+            padding-bottom:15px;
+            margin-bottom:15px;
+        }
+        .boleta-header h2 { color:var(--primary, #0b84d8); }
+        .boleta-datos {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+            margin-bottom:20px;
+        }
+        .boleta-tabla {
+            width:100%;
+            border-collapse:collapse;
+            margin:15px 0;
+        }
+        .boleta-tabla th {
+            background:#f1f5f9;
+            border:1px solid #ddd;
+            padding:8px;
+            text-align:left;
+        }
+        .boleta-tabla td {
+            border:1px solid #ddd;
+            padding:8px;
+        }
+        .boleta-totales {
+            text-align:right;
+            margin-top:15px;
+            font-weight:bold;
+        }
+        .boleta-footer {
+            margin-top:30px;
+            border-top:2px solid #333;
+            padding-top:15px;
+            text-align:center;
+            font-size:0.9rem;
+            color:#555;
+        }
+
+        .acciones {
+            display:flex;
+            gap:15px;
+            margin-top:20px;
+            flex-wrap:wrap;
+        }
+
+        .toast {
+            position:fixed;
+            bottom:30px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#059669;
+            color:white;
+            padding:12px 28px;
+            border-radius:60px;
+            font-weight:600;
+            display:none;
+            z-index:999;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width:768px) {
+            .sidebar { width:200px; }
+            .main { margin-left:200px; padding:20px; }
+            .row { flex-direction:column; }
+            .boleta-datos { grid-template-columns:1fr; }
+        }
+        @media (max-width:500px) {
+            .sidebar { width:100%; height:auto; position:relative; }
+            .main { margin-left:0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <h2>SEDACHIMBOTE</h2>
+        <p>Administrador</p>
+    </div>
+    <div class="menu">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="crm.html">👥 CRM Clientes</a>
+        <a href="erp.html">📦 ERP Gestión</a>
+        <a href="facturacion.html" class="active">💧 Facturación y Cobranza</a>
+        <a href="#">🚰 Gestión de Redes</a>
+        <a href="mantenimiento.html">🔧 Mantenimiento</a>
+        <a href="reportes.html">📊 Reportes</a>
+        <a href="configuracion.html">⚙️ Configuración</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>💧 Facturación y Cobranza</h1>
+        <span style="color:#64748b;">Usuario: <strong id="userNameDisplay">Admin</strong></span>
+    </div>
+
+    <!-- Formulario de facturación -->
+    <div class="form-section">
+        <h2>📝 Nueva Boleta</h2>
+        <div class="row">
+            <div class="field">
+                <label>Cliente</label>
+                <select id="clienteSelect">
+                    <option value="Juan Pérez">Juan Pérez</option>
+                    <option value="María López">María López</option>
+                    <option value="Carlos Díaz">Carlos Díaz</option>
+                    <option value="Ana Torres">Ana Torres</option>
+                    <option value="Luis García">Luis García</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Fecha</label>
+                <input type="date" id="fechaFactura">
+            </div>
+            <div class="field">
+                <label>N° Boleta</label>
+                <input type="text" id="numeroBoleta" placeholder="Autogenerado" readonly>
+            </div>
+        </div>
+
+        <h3 style="margin-top:20px; color:var(--primary, #0b84d8);">Conceptos</h3>
+        <table class="tabla-items" id="tablaItems">
+            <thead>
+                <tr>
+                    <th style="width:40%;">Descripción</th>
+                    <th style="width:20%;">Cantidad</th>
+                    <th style="width:20%;">Precio Unit.</th>
+                    <th style="width:15%;">Total</th>
+                    <th style="width:5%;"></th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoItems">
+                <!-- Filas dinámicas -->
+            </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="agregarFila()">➕ Agregar concepto</button>
+
+        <div class="totales">
+            <div>Subtotal: S/ <span id="subtotal">0.00</span></div>
+            <div>IGV (18%): S/ <span id="igv">0.00</span></div>
+            <div style="font-size:1.3rem; color:var(--primary, #0b84d8);">Total: S/ <span id="total">0.00</span></div>
+        </div>
+
+        <div class="acciones">
+            <button class="btn" onclick="generarBoleta()">📄 Generar Boleta</button>
+            <button class="btn btn-success" onclick="imprimirBoleta()">🖨️ Imprimir / PDF</button>
+            <button class="btn btn-secondary" onclick="limpiarFormulario()">🗑️ Limpiar</button>
+        </div>
+    </div>
+
+    <!-- Vista de la boleta generada -->
+    <div class="boleta-container" id="boletaContainer">
+        <div class="boleta" id="boletaContenido">
+            <div class="boleta-header">
+                <div>
+                    <h2>SEDACHIMBOTE S.A.</h2>
+                    <p>RUC: 20512345678</p>
+                    <p>Av. Las Aguas 1245, San Isidro - Lima</p>
+                </div>
+                <div style="text-align:right;">
+                    <p><strong>BOLETA DE VENTA</strong></p>
+                    <p>N° <span id="boletaNumero">001-001</span></p>
+                    <p>Fecha: <span id="boletaFecha">--/--/----</span></p>
+                </div>
+            </div>
+            <div class="boleta-datos">
+                <div><strong>Cliente:</strong> <span id="boletaCliente">---</span></div>
+                <div><strong>DNI/RUC:</strong> <span id="boletaDni">---</span></div>
+            </div>
+            <table class="boleta-tabla" id="boletaTabla">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Cant.</th>
+                        <th>Precio Unit.</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="boletaCuerpo">
+                </tbody>
+            </table>
+            <div class="boleta-totales">
+                <div>Subtotal: S/ <span id="boletaSubtotal">0.00</span></div>
+                <div>IGV: S/ <span id="boletaIgv">0.00</span></div>
+                <div style="font-size:1.2rem;">Total: S/ <span id="boletaTotal">0.00</span></div>
+            </div>
+            <div class="boleta-footer">
+                <p>Gracias por su preferencia - ¡El agua es vida!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">✅ Operación exitosa</div>
+
+<script>
+    // ---------- INICIALIZAR ----------
+    let contadorItems = 0;
+    let items = []; // array para guardar los conceptos
+
+    // Cargar fecha actual
+    document.getElementById('fechaFactura').valueAsDate = new Date();
+
+    // Generar número de boleta automático (simulado)
+    function generarNumeroBoleta() {
+        const ultimo = localStorage.getItem('ultimoNumeroBoleta') || '001';
+        const nuevo = String(parseInt(ultimo) + 1).padStart(3, '0');
+        localStorage.setItem('ultimoNumeroBoleta', nuevo);
+        return `001-${nuevo}`;
+    }
+    document.getElementById('numeroBoleta').value = generarNumeroBoleta();
+
+    // ---------- AGREGAR FILA (concepto) ----------
+    function agregarFila(descripcion = '', cantidad = 1, precio = 0) {
+        const tbody = document.getElementById('cuerpoItems');
+        const tr = document.createElement('tr');
+        tr.id = `item-${contadorItems}`;
+        tr.innerHTML = `
+            <td><input type="text" class="desc-item" value="${descripcion}" placeholder="Ej: Servicio de agua potable"></td>
+            <td><input type="number" class="cant-item" value="${cantidad}" min="1"></td>
+            <td><input type="number" class="precio-item" value="${precio}" min="0" step="0.01"></td>
+            <td class="total-fila">S/ 0.00</td>
+            <td><button class="btn-eliminar" onclick="eliminarFila('${tr.id}')">✖</button></td>
+        `;
+        tbody.appendChild(tr);
+        contadorItems++;
+        // Actualizar totales al cambiar cualquier input
+        const inputs = tr.querySelectorAll('input');
+        inputs.forEach(inp => inp.addEventListener('input', calcularTotales));
+        calcularTotales();
+    }
+
+    // ---------- ELIMINAR FILA ----------
+    function eliminarFila(id) {
+        const fila = document.getElementById(id);
+        if (fila) {
+            fila.remove();
+            calcularTotales();
+        }
+    }
+
+    // ---------- CALCULAR TOTALES ----------
+    function calcularTotales() {
+        let subtotal = 0;
+        const filas = document.querySelectorAll('#cuerpoItems tr');
+        filas.forEach(tr => {
+            const cant = parseFloat(tr.querySelector('.cant-item')?.value) || 0;
+            const precio = parseFloat(tr.querySelector('.precio-item')?.value) || 0;
+            const total = cant * precio;
+            const totalCell = tr.querySelector('.total-fila');
+            if (totalCell) totalCell.textContent = `S/ ${total.toFixed(2)}`;
+            subtotal += total;
+        });
+
+        const igv = subtotal * 0.18;
+        const total = subtotal + igv;
+
+        document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+        document.getElementById('igv').textContent = igv.toFixed(2);
+        document.getElementById('total').textContent = total.toFixed(2);
+    }
+
+    // ---------- GENERAR BOLETA ----------
+    function generarBoleta() {
+        // Validar que haya al menos un concepto con descripción y precios >0
+        const filas = document.querySelectorAll('#cuerpoItems tr');
+        let valido = false;
+        filas.forEach(tr => {
+            const desc = tr.querySelector('.desc-item')?.value.trim();
+            const cant = parseFloat(tr.querySelector('.cant-item')?.value) || 0;
+            const precio = parseFloat(tr.querySelector('.precio-item')?.value) || 0;
+            if (desc && cant > 0 && precio > 0) valido = true;
+        });
+
+        if (!valido) {
+            mostrarToast('Agrega al menos un concepto válido');
+            return;
+        }
+
+        // Obtener datos del formulario
+        const cliente = document.getElementById('clienteSelect').value;
+        const fecha = document.getElementById('fechaFactura').value;
+        const numero = document.getElementById('numeroBoleta').value;
+
+        // Construir la boleta
+        document.getElementById('boletaCliente').textContent = cliente;
+        document.getElementById('boletaFecha').textContent = fecha || '--/--/----';
+        document.getElementById('boletaNumero').textContent = numero;
+
+        // Llenar tabla de la boleta
+        const tbody = document.getElementById('boletaCuerpo');
+        tbody.innerHTML = '';
+        let subtotal = 0;
+        filas.forEach(tr => {
+            const desc = tr.querySelector('.desc-item')?.value.trim() || '---';
+            const cant = parseFloat(tr.querySelector('.cant-item')?.value) || 0;
+            const precio = parseFloat(tr.querySelector('.precio-item')?.value) || 0;
+            const total = cant * precio;
+            if (desc && cant > 0 && precio > 0) {
+                subtotal += total;
+                const tr2 = document.createElement('tr');
+                tr2.innerHTML = `
+                    <td>${desc}</td>
+                    <td>${cant}</td>
+                    <td>S/ ${precio.toFixed(2)}</td>
+                    <td>S/ ${total.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr2);
+            }
+        });
+
+        const igv = subtotal * 0.18;
+        const total = subtotal + igv;
+        document.getElementById('boletaSubtotal').textContent = subtotal.toFixed(2);
+        document.getElementById('boletaIgv').textContent = igv.toFixed(2);
+        document.getElementById('boletaTotal').textContent = total.toFixed(2);
+
+        // Mostrar la boleta
+        document.getElementById('boletaContainer').classList.add('visible');
+        mostrarToast('Boleta generada');
+    }
+
+    // ---------- IMPRIMIR BOLETA ----------
+    function imprimirBoleta() {
+        const contenido = document.getElementById('boletaContenido');
+        if (!contenido) return;
+        // Guardar la ventana actual y abrir impresión
+        const ventana = window.open('', '_blank');
+        ventana.document.write(`
+            <html>
+            <head>
+                <title>Boleta SEDACHIMBOTE</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding:30px; }
+                    .boleta { max-width:800px; margin:auto; border:2px solid #333; padding:30px; background:#fff; }
+                    .boleta-header { display:flex; justify-content:space-between; border-bottom:2px solid #333; padding-bottom:15px; margin-bottom:15px; }
+                    .boleta-header h2 { color:#0b84d8; }
+                    .boleta-datos { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+                    .boleta-tabla { width:100%; border-collapse:collapse; margin:15px 0; }
+                    .boleta-tabla th { background:#f1f5f9; border:1px solid #ddd; padding:8px; text-align:left; }
+                    .boleta-tabla td { border:1px solid #ddd; padding:8px; }
+                    .boleta-totales { text-align:right; margin-top:15px; font-weight:bold; }
+                    .boleta-footer { margin-top:30px; border-top:2px solid #333; padding-top:15px; text-align:center; font-size:0.9rem; color:#555; }
+                    @media print { body { margin:0; padding:0; } .boleta { border: none; padding:20px; } }
+                </style>
+            </head>
+            <body>
+                <div class="boleta">
+                    ${contenido.innerHTML}
+                </div>
+                <script>
+                    window.onload = function() { window.print(); window.close(); };
+                <\/script>
+            </body>
+            </html>
+        `);
+        ventana.document.close();
+    }
+
+    // ---------- LIMPIAR FORMULARIO ----------
+    function limpiarFormulario() {
+        document.getElementById('cuerpoItems').innerHTML = '';
+        contadorItems = 0;
+        document.getElementById('boletaContainer').classList.remove('visible');
+        document.getElementById('numeroBoleta').value = generarNumeroBoleta();
+        document.getElementById('fechaFactura').valueAsDate = new Date();
+        calcularTotales();
+        mostrarToast('Formulario limpiado');
+    }
+
+    // ---------- TOAST ----------
+    function mostrarToast(mensaje) {
+        const toast = document.getElementById('toast');
+        toast.textContent = '✅ ' + mensaje;
+        toast.style.display = 'block';
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+
+    // ---------- CARGAR NOMBRE DE USUARIO ----------
+    function cargarUsuario() {
+        const perfil = JSON.parse(localStorage.getItem('config_perfil')) || {};
+        document.getElementById('userNameDisplay').textContent = perfil.nombre || 'Admin';
+    }
+
+    // ---------- INICIALIZAR CON UNA FILA DE EJEMPLO ----------
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarUsuario();
+        // Agregar una fila de ejemplo
+        agregarFila('Servicio de agua potable - mes', 1, 45.00);
+    });
+</script>
+</body>
+</html>
